@@ -1,7 +1,7 @@
 <template>
     <div class="raceEnding">
         <img class="raceLoadGif" :src="getRaceLoadGif" alt="Racing Car racing">
-        <div class="winnersWrapper">
+        <div v-if="raceIsRunning" class="winnersWrapper">
             <div class="winnerTitle">Winning Team: {{raceWinningTeam}}</div>
             <Winner
                 class="winners"
@@ -18,6 +18,7 @@
 <script>
 import { mapState } from 'vuex'
 import Winner from "../atoms/Winner";
+import countDownTimings from "@/consts/countdown.const";
 
 export default {
   name: 'RaceEnding',
@@ -33,8 +34,13 @@ export default {
   },
   data: () => {
     return {
-      winners: ['0x0430B96F84978320546cdEbe3BBF4C82AF90A7C1', '0x4C39f414EE0cba4Ae8c9731e5f7e55A5b58C6165', '0xA4653C5a2c085499D5c13D881074f488d12c3926'],
-      amounts: ['1', '2', '3']
+      winners: [],
+      timerCount: countDownTimings.countDownRunTime,
+      amounts: ['1', '2', '3'],
+      ...mapState('data', {
+        raceIsRunning: state => state.raceIsRunning,
+        winners: state => state.winners
+      }),
     }
   }
 }

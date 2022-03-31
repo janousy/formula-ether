@@ -39,7 +39,7 @@
 <script>
 import DriverInformation from "../atoms/DriverInformation";
 import {mapState} from "vuex";
-import { sendBet } from "../../services/etherService";
+import {getWinners, sendBet} from "../../services/etherService";
 
 export default {
   /* eslint-disable semi */
@@ -54,7 +54,8 @@ export default {
   },
   computed: {
     ...mapState('data', {
-      signer: (state) => state.signer
+      signer: (state) => state.signer,
+      isBetPlaced: (state) => state.isBetPlaced
     }),
     getTeamLogo () {
       return require(`@/assets/images/teams/${this.team.key}.jpg`);
@@ -68,10 +69,6 @@ export default {
     isButtonDisabled () {
       return this.betAmount <= 0 || this.betAmount === null;
     },
-    placeBet () {
-      sendBet(this.betAmount, this.signer);
-      return null;
-    }
   },
   data: () => {
     return {
@@ -79,6 +76,13 @@ export default {
     }
   },
   methods: {
+    async placeBet() {
+      await sendBet(this.betAmount, this.signer);
+      this.$store.commit("data/setBetIsPlaced", true)
+      let winners = await getWinners(this.signer)
+      this.$store.commit("data/setWinners", winners)
+      return null;
+    }
   }
 }
 </script>
