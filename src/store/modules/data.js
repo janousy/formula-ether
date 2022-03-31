@@ -4,9 +4,10 @@
 const moduleState = {
   counter: 0,
   raceIsRunning: false,
-  account: null,
   signer: null,
-  raceWinningTeam: ''
+  raceWinningTeam: '',
+  betIsPlaced: false,
+  winners: [],
 };
 
 const getters = {};
@@ -25,14 +26,17 @@ const mutations = {
   setRaceIsRunning (state, raceIsRunning) {
     state.raceIsRunning = raceIsRunning;
   },
-  setAccount (state, account) {
-    state.account = account;
-  },
   setSigner (state, signer) {
     state.signer = signer;
   },
   setRaceWinningTeam (state, raceWinningTeam) {
     state.raceWinningTeam = raceWinningTeam;
+  },
+  setBetIsPlaced (state, betIsPlaced) {
+    state.betIsPlaced = betIsPlaced;
+  },
+  setWinners (state, winners) {
+    state.winners = winners;
   }
 };
 

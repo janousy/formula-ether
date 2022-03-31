@@ -1,7 +1,7 @@
 <template>
     <div>
         <RaceHeader/>
-        <div v-if="!raceIsRunning" class="teamsWrapper">
+        <div v-if="!betIsPlaced" class="teamsWrapper">
             <TeamTile
                 v-for="(team, index) in getTeams"
                 :key="`team${index}`"
@@ -15,7 +15,7 @@
             </div>
             <betting-modal :team="getTeams[selectedTeam]"/>
         </div>
-        <div v-if="raceIsRunning">
+        <div v-if="betIsPlaced">
             <RaceEnding/>
         </div>
     </div>
@@ -34,7 +34,7 @@ export default {
   components: { RaceEnding, BettingModal, TeamTile, RaceHeader },
   computed: {
     ...mapState('data', {
-      raceIsRunning: (state) => state.raceIsRunning
+      betIsPlaced: (state) => state.betIsPlaced,
     }),
     getTeams () {
       return f1MetaData.teams
