@@ -37,11 +37,13 @@ export default {
   },
   methods: {
     callContractStartRace () {
-      console.log('contract starts race')
+      console.log('contract starts race');
+        this.$store.commit('data/setRaceIsRunning', true)
     },
     updateRaceLocation () {
       console.log('race location is updated');
-      this.raceCounter = (this.raceCounter + 1) % raceLocations.raceName.length
+      this.raceCounter = (this.raceCounter + 1) % raceLocations.raceName.length;
+      this.$store.commit('data/setRaceIsRunning', false);
     }
 
   }
