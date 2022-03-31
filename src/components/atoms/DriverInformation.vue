@@ -19,10 +19,10 @@ export default {
   },
   computed: {
     getDriverImage () {
-      return `/src/assets/images/drivers/${this.driver.key}.png`;
+      return require(`@/assets/images/drivers/${this.driver.key}.png`);
     },
     getDriverNumber () {
-      return `/src/assets/images/driverNumbers/${this.driver.id}.png`;
+      return require(`@/assets/images/driverNumbers/${this.driver.id}.png`);
     }
   }
 }
@@ -42,13 +42,13 @@ export default {
         .driverNumber{
             width: 100px;
             object-fit: contain;
+            padding-top: 15px;
         }
         .driverName {
             font-family: F1-Bold;
             font-size: 30px;
             padding-left: 20px;
         }
-    ;
     }
 
 </style>

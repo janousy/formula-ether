@@ -11,7 +11,6 @@
 </template>
 
 <script>
-// TODO fix errors, use state instead of data
 import raceLocations from '@/consts/raceLocations.const.js'
 import Timer from '@/components/atoms/Timer.vue'
 
@@ -22,10 +21,11 @@ export default {
   components: { Timer },
   computed: {
     getRaceImage () {
-      return `/src/assets/images/raceTracks/${raceLocations.locations[this.raceCounter]}.png`;
+      return require(`@/assets/images/raceTracks/${raceLocations.locations[this.raceCounter]}.png`);
     },
     getRaceName () {
       return raceLocations.raceName[this.raceCounter];
+
     }
   },
   data: () => {

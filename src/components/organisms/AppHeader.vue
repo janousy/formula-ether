@@ -1,6 +1,6 @@
 <template>
     <div class="AppHeaderWrapper">
-        <img class="f1Logo" src="@/assets/images/f1/f1_logo.svg" alt="Formula 1 Logo">
+        <img class="f1Logo" :src="getf1Logo" alt="Formula 1 Logo">
         <span class="text">{{getAppHeaderText}}</span>
         <b-button :disabled="!!signer" @click="connectMetamask()" class="metamaskButton">
           {{getButtonText}}
@@ -16,6 +16,9 @@ import {ethers} from "ethers";
 export default {
   name: 'AppHeader',
   computed: {
+    getf1Logo(){
+        return require('@/assets/images/f1/f1_logo.svg')   ;
+    },
     getAppHeaderText () {
       return headerTexts.appHeaderTexts[0]
     },
@@ -44,12 +47,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "src/styles/fonts.scss";
+    @import "src/styles/fonts.scss";
+
     .AppHeaderWrapper{
         width: 100%;
         height: 71px;
         background-color: #e10600;
         padding-left: 50px;
+        position: sticky;
+        top: 0;
         .f1Logo{
             display: inline-block;
             vertical-align: top;
@@ -71,8 +77,8 @@ export default {
             margin-top: 10px;
             height: 50px;
             right: 10px;
+            font-size: 20px;
         }
-
     }
 
 </style>

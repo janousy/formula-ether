@@ -105,22 +105,20 @@ export default {
             justify-content: space-around;
             text-align: center;
             width: 80%;
-            .minutes {
-
-            }
-            .seconds {
-
-            }
             .time {
                 font-family: F1-Bold;
                 font-size: 25px;
                 margin-bottom: 0;
+                width: 40px;
+                text-align: center;
+                &.colorRed {
+                    color: #e10600;
+                }
             }
             .unit {
                 font-family: F1-Regular;
                 font-size: 15px;
             }
-
         }
     }
 

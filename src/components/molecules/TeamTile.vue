@@ -27,12 +27,12 @@ export default {
   },
   computed: {
     getTeamIcon () {
-      return `/src/assets/images/teams/${this.team.key}.jpg`;
+      return require(`@/assets/images/teams/${this.team.key}.jpg`);
     }
   },
   methods: {
     getDriverIcon (driverNumber) {
-      return `/src/assets/images/drivers/${this.team.drivers[driverNumber].key}.png`;
+      return require(`@/assets/images/drivers/${this.team.drivers[driverNumber].key}.png`);
     }
   }
 }
@@ -44,9 +44,9 @@ export default {
     .teamTile {
         width: 300px;
         height: 300px;
-
         color: white;
         border: solid 2px white;
+        border-radius: 5px;
         text-align: center;
         margin: 10px;
         cursor: pointer;

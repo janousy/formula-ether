@@ -50,16 +50,14 @@ export default {
         width: 100%;
         height: 100%;
         background-color: #38383f;
-        overflow: auto;
         // background-color: #1f1f27;
-        position: relative;
+        overflow: auto;
         .helpButton {
             position: absolute;
             bottom: 30px;
             right: 30px;
             font-family: F1-Bold;
             font-size: 20px;
-            font-weight: bolder;
         }
     }
 </style>

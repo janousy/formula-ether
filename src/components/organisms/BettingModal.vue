@@ -57,7 +57,7 @@ export default {
       signer: (state) => state.signer
     }),
     getTeamLogo () {
-      return `@/assets/images/teams/${this.team.key}.jpg`;
+      return require(`@/assets/images/teams/${this.team.key}.jpg`);
     },
     isNumberValid () {
       if (this.betAmount === null) {

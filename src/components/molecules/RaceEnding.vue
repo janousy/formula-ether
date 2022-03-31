@@ -1,6 +1,6 @@
 <template>
     <div class="raceEnding">
-        <img class="raceLoadGif" src="/src/assets/images/general/race-load-icon.gif" alt="Racing Car racing">
+        <img class="raceLoadGif" :src="getRaceLoadGif" alt="Racing Car racing">
         <div class="winnersWrapper">
             <div class="winnerTitle">Winning Team: {{raceWinningTeam}}</div>
             <Winner
@@ -26,7 +26,10 @@ export default {
   computed: {
     ...mapState('data', {
       raceWinningTeam: (state) => state.raceWinningTeam
-    })
+    }),
+    getRaceLoadGif() {
+        return require('@/assets/images/general/race-load-icon.gif');
+    }
   },
   data: () => {
     return {
