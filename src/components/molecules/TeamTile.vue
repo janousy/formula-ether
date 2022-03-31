@@ -1,14 +1,11 @@
 <template>
     <div class="teamTile">
-        <div class="generalInfoWrapper">
+        <div class="textWrapper">
+            <div class="teamName">{{team.displayName}}</div>
+            <div class="quote">Quote = 0</div>
+        </div>
+        <div class="imageWrapper">
             <img class="teamIcon" :src="getTeamIcon" alt="TeamIcon">
-            <div>{{team.displayName}}</div>
-            <div>Quote = 0</div></div>
-        <div class="driverInfoWrapper">
-            <div>{{team.drivers[0].displayName}}</div>
-            <div>{{team.drivers[1].displayName}}</div>
-            <img class="driverIcon" :src="getDriverIcon(0)" alt="Driver0">
-            <img class="driverIcon" :src="getDriverIcon(1)" alt="Driver1">
         </div>
     </div>
 </template>
@@ -31,9 +28,6 @@ export default {
     }
   },
   methods: {
-    getDriverIcon (driverNumber) {
-      return require(`@/assets/images/drivers/${this.team.drivers[driverNumber].key}.png`);
-    }
   }
 }
 </script>
@@ -45,26 +39,31 @@ export default {
         width: 300px;
         height: 300px;
         color: white;
-        border: solid 2px white;
+        border: solid 4px #6c757d;
         border-radius: 5px;
-        text-align: center;
         margin: 10px;
         cursor: pointer;
-        .generalInfoWrapper {
-            font-family: F1-Regular;
-            font-size: 25px;
+        padding: 10px 10px 10px 10px;
+        position: relative;
+        display: flex;
+        flex-flow: column;
+        justify-content: space-between;
+        .imageWrapper {
+            height: 150px;
             display: flex;
+            justify-content: center;
             .teamIcon {
-                width:100px;
+                width:200px;
                 object-fit: contain;
             }
         }
-        .driverInfoWrapper {
+        .teamName {
+            font-family: F1-Bold;
+            font-size: 30px;
+        }
+        .quote {
             font-family: F1-Regular;
             font-size: 25px;
-            .driverIcon {
-                width: 60px;
-            }
         }
     }
 </style>

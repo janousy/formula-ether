@@ -6,12 +6,12 @@
             </div>
         </div>
         <div class="clockWrapper">
-            <div class="minutes">
-                <p class="time">{{getMinutes}}</p>
+            <div>
+                <p class="time" :class="timerLessThan1Min ? 'colorRed' : ''">{{getMinutes}}</p>
                 <span class="unit">mins</span>
             </div>
-            <div class="seconds">
-                <p class="time">{{getSeconds}}</p>
+            <div>
+                <p class="time" :class="timerLessThan1Min ? 'colorRed' : ''">{{getSeconds}}</p>
                 <span class="unit">sec</span>
             </div>
         </div>
@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import headerTexts from '@/consts/headerTexts.const'
-import countDownTimings from '@/consts/countdown.const'
+import headerTexts from "../../consts/headerTexts.const";
+import countDownTimings from "../../consts/countdown.const";
 
 export default {
   /* eslint-disable semi */
@@ -36,6 +36,9 @@ export default {
     },
     getMinutes () {
       return Math.floor(this.timerCount / 60);
+    },
+    timerLessThan1Min () {
+      return this.timerCount < 60;
     }
   },
   data: () => {

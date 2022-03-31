@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { helpModalText } from '@/consts/helpModalText.const'
+import { helpModalText } from "../../consts/helpModalText.const";
 
 export default {
   /* eslint-disable semi */

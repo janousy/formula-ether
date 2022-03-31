@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import headerTexts from '@/consts/headerTexts.const'
+import headerTexts from "../../consts/headerTexts.const";
 import { mapState } from 'vuex'
 import {ethers} from "ethers";
 
@@ -26,12 +26,12 @@ export default {
       signer: state => state.signer,
     }),
       getButtonText () {
-          return this.address ? 'Connected' : 'Connect';
+          return this.signer ? 'Connected' : 'Connect';
       }
   },
   methods: {
     async connectMetamask() {
-      const provider = new ethers.providers.Web3Provider(window.ethereum)
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
       await provider.send("eth_requestAccounts", []);
       const signer = provider.getSigner()
       this.$store.commit('data/setSigner', signer);

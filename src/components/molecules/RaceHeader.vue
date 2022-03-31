@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import raceLocations from '@/consts/raceLocations.const.js'
-import Timer from '@/components/atoms/Timer.vue'
+import raceLocations from "../../consts/raceLocations.const";
+import Timer from "../atoms/Timer";
 
 export default {
   /* eslint-disable semi */
