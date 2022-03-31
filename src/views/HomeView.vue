@@ -13,10 +13,10 @@
 </template>
 
 <script>
-import AppHeader from '@/components/organisms/AppHeader.vue'
-import RaceSetup from '@/components/organisms/RaceSetup.vue'
-import HelpModal from '@/components/organisms/HelpModal.vue'
 import { mapState } from 'vuex'
+import AppHeader from "../components/organisms/AppHeader";
+import RaceSetup from "../components/organisms/RaceSetup";
+import HelpModal from "../components/organisms/HelpModal";
 
 export default {
   /* eslint-disable semi */

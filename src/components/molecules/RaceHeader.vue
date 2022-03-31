@@ -4,19 +4,21 @@
             <div class="trackImageWrapper">
                 <img class="trackImage" :src="getRaceImage" alt="Track Image">
             </div>
-            <div class="raceName">{{getRaceName}}</div>
+            <div class="textWrapper">
+                <span>{{getRaceName}}</span>
+                <span>Total Bets: {{getTotalBets()}} Ether</span>
+            </div>
+
         </div>
         <Timer class="timer" @countDownIsZero="callContractStartRace" @resetCounter="updateRaceLocation()"/>
     </div>
 </template>
 
 <script>
-import raceLocations from '@/consts/raceLocations.const.js'
-import Timer from '@/components/atoms/Timer.vue'
+import raceLocations from "../../consts/raceLocations.const";
+import Timer from "../atoms/Timer";
 
 export default {
-  /* eslint-disable semi */
-
   name: 'RaceHeader',
   components: { Timer },
   computed: {
@@ -44,8 +46,10 @@ export default {
       console.log('race location is updated');
       this.raceCounter = (this.raceCounter + 1) % raceLocations.raceName.length;
       this.$store.commit('data/setRaceIsRunning', false);
+    },
+    getTotalBets() {
+        return 10;
     }
-
   }
 }
 </script>
@@ -72,11 +76,15 @@ export default {
                     width: 120px;
                 }
             }
-            .raceName {
+            .textWrapper{
+                padding-left: 10px;
+                display: flex;
+                flex-flow: column;
                 font-family: F1-Bold;
                 color: white;
                 font-size: 30px;
             }
+
         }
         .timer {
             margin-right: 40px;

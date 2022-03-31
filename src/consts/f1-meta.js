@@ -18,7 +18,7 @@ const f1MetaData = {
     },
     {
       key: 'alpha_tauri',
-      displayName: 'Alpha Tauri',
+      displayName: 'AlphaTauri',
       drivers: [
         {
           key: '10_pierre_gasly',
@@ -82,7 +82,7 @@ const f1MetaData = {
     },
     {
       key: 'haas',
-      displayName: 'Haas',
+      displayName: 'Haas F1 Team',
       drivers: [
         {
           key: '47_mick_schumacher',
@@ -130,7 +130,7 @@ const f1MetaData = {
     },
     {
       key: 'redbull',
-      displayName: 'Red Bull',
+      displayName: 'Red Bull Racing',
       drivers: [
         {
           key: '1_max_verstappen',

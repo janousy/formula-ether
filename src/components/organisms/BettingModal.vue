@@ -37,13 +37,11 @@
 </template>
 
 <script>
-import DriverInformation from '@/components/atoms/DriverInformation.vue'
+import DriverInformation from "../atoms/DriverInformation";
 import {mapState} from "vuex";
-import {sendBet} from "@/services/etherService";
+import { sendBet } from "../../services/etherService";
 
 export default {
-  /* eslint-disable semi */
-
   name: 'BettingModal',
   components: { DriverInformation },
   props: {
@@ -61,16 +59,16 @@ export default {
     },
     isNumberValid () {
       if (this.betAmount === null) {
-        return null
+        return null;
       }
-      return this.betAmount > 0
+      return this.betAmount > 0;
     },
     isButtonDisabled () {
-      return this.betAmount <= 0 || this.betAmount === null
+      return this.betAmount <= 0 || this.betAmount === null;
     },
     placeBet () {
-      sendBet(this.betAmount, this.signer)
-      return null
+      sendBet(this.betAmount, this.signer);
+      return null;
     }
   },
   data: () => {

@@ -1,7 +1,7 @@
 /* eslint-disable semi */
 
 const countDownTimings = {
-  countDownRunTime: 3 * 60,
+  countDownRunTime: 10 * 60,
   countDownResetTime: 10 * 1000,
 };
 

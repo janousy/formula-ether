@@ -22,16 +22,14 @@
 </template>
 
 <script>
-import RaceHeader from '@/components/molecules/RaceHeader.vue'
-import TeamTile from '@/components/molecules/TeamTile.vue'
-import BettingModal from '@/components/organisms/BettingModal.vue'
+import RaceHeader from "../molecules/RaceHeader";
+import TeamTile from "../molecules/TeamTile";
+import BettingModal from "./BettingModal";
 import { mapState } from 'vuex'
-import f1MetaData from '@/consts/f1-meta'
-import RaceEnding from '@/components/molecules/RaceEnding.vue';
+import RaceEnding from "../molecules/RaceEnding";
+import f1MetaData from "../../consts/f1-meta";
 
 export default {
-  /* eslint-disable semi */
-
   name: 'RaceSetup',
   components: { RaceEnding, BettingModal, TeamTile, RaceHeader },
   computed: {
@@ -50,7 +48,6 @@ export default {
   },
   methods: {
     clickOnTeam (teamIndex) {
-      // TODO either write into store what would be better i guess, or pass as props
       this.selectedTeam = teamIndex;
       this.$bvModal.show('BettingModal');
     }

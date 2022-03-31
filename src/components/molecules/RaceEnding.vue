@@ -17,7 +17,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import Winner from '@/components/atoms/Winner.vue'
+import Winner from "../atoms/Winner";
 
 export default {
   name: 'RaceEnding',
