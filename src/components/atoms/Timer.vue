@@ -23,7 +23,6 @@ import headerTexts from "../../consts/headerTexts.const";
 import countDownTimings from "../../consts/countdown.const";
 
 export default {
-  /* eslint-disable semi */
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'Timer',
   components: {},

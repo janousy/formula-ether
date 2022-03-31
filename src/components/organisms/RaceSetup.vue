@@ -30,8 +30,6 @@ import RaceEnding from "../molecules/RaceEnding";
 import f1MetaData from "../../consts/f1-meta";
 
 export default {
-  /* eslint-disable semi */
-
   name: 'RaceSetup',
   components: { RaceEnding, BettingModal, TeamTile, RaceHeader },
   computed: {
@@ -50,7 +48,6 @@ export default {
   },
   methods: {
     clickOnTeam (teamIndex) {
-      // TODO either write into store what would be better i guess, or pass as props
       this.selectedTeam = teamIndex;
       this.$bvModal.show('BettingModal');
     }

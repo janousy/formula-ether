@@ -2,7 +2,7 @@
     <div class="teamTile">
         <div class="textWrapper">
             <div class="teamName">{{team.displayName}}</div>
-            <div class="quote">Quote = 0</div>
+            <div class="quote">Quote = {{getQuote()}}</div>
         </div>
         <div class="imageWrapper">
             <img class="teamIcon" :src="getTeamIcon" alt="TeamIcon">
@@ -13,8 +13,6 @@
 <script>
 
 export default {
-  /* eslint-disable semi */
-
   name: 'TeamTile',
   props: {
     team: {
@@ -28,6 +26,9 @@ export default {
     }
   },
   methods: {
+      getQuote() {
+          return 0;
+      }
   }
 }
 </script>

@@ -8,8 +8,6 @@
 
 <script>
 export default {
-  /* eslint-disable semi */
-
   name: 'DriverInformation',
   props: {
     driver: {

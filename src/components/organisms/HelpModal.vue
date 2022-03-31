@@ -20,8 +20,6 @@
 import { helpModalText } from "../../consts/helpModalText.const";
 
 export default {
-  /* eslint-disable semi */
-
   name: 'HelpModal',
   computed: {
     getHelpText () {

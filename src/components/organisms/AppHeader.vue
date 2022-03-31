@@ -17,7 +17,7 @@ export default {
   name: 'AppHeader',
   computed: {
     getf1Logo(){
-        return require('@/assets/images/f1/f1_logo.svg')   ;
+        return require('@/assets/images/f1/f1_logo.svg');
     },
     getAppHeaderText () {
       return headerTexts.appHeaderTexts[0]
@@ -56,6 +56,7 @@ export default {
         padding-left: 50px;
         position: sticky;
         top: 0;
+        z-index: 5;
         .f1Logo{
             display: inline-block;
             vertical-align: top;

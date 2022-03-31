@@ -42,8 +42,6 @@ import {mapState} from "vuex";
 import { sendBet } from "../../services/etherService";
 
 export default {
-  /* eslint-disable semi */
-
   name: 'BettingModal',
   components: { DriverInformation },
   props: {
