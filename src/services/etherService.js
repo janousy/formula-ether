@@ -1,19 +1,18 @@
 import {ethers} from "ethers";
 import addressesConst from "@/consts/addresses.const";
-import ABI from "@/contracts/betting";
+import ABI from "@/contracts/bettingAbi";
 
-export async function getBettingService() {
+export async function sendBet(amount, signer) {
     let bettingAddress = addressesConst.bettingAddress
-    let provider = ethers.getDefaultProvider("http://localhost:7545")
-    let blockNumber = await provider.getBlockNumber()
-    const signer = provider.getSigner()
-    // eslint-disable-next-line no-unused-vars
     let bettingContract = new ethers.Contract(bettingAddress, ABI, signer)
-    //console.log(await bettingContract.name())
-    console.log(blockNumber)
     //let signature = await signer.signMessage("AlfaRomeo");
-    let amount = ethers.utils.parseEther("0.1")
-    let currentValue = await bettingContract.bet("AlfaRomeo", {value: amount});
-    console.log(currentValue)
-    //console.log(currentValue)
+    console.log("Amount to bet: ", amount)
+    let valueAmount = ethers.utils.parseEther(amount.toString())
+    try {
+        let response = await bettingContract.bet("AlfaRomeo", {value: valueAmount});
+        console.log(response)
+    } catch (ex) {
+        console.warn(ex)
+    }
 }
+export default sendBet()

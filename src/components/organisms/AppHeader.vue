@@ -2,8 +2,8 @@
     <div class="AppHeaderWrapper">
         <img class="f1Logo" src="@/assets/images/f1/f1_logo.svg" alt="Formula 1 Logo">
         <span class="text">{{getAppHeaderText}}</span>
-        <b-button :disabled="!!address" @click="connectMetamask()" class="metamaskButton">
-            {{getButtonText}}
+        <b-button :disabled="!!signer" @click="connectMetamask()" class="metamaskButton">
+          {{getButtonText}}
         </b-button>
     </div>
 </template>
@@ -11,26 +11,34 @@
 <script>
 import headerTexts from '@/consts/headerTexts.const'
 import { mapState } from 'vuex'
+import {ethers} from "ethers";
 
 export default {
-  /* eslint-disable semi */
-
   name: 'AppHeader',
   computed: {
     getAppHeaderText () {
       return headerTexts.appHeaderTexts[0]
     },
     ...mapState('data', {
-      address: (state) => state.account
+      signer: state => state.signer,
     }),
       getButtonText () {
           return this.address ? 'Connected' : 'Connect';
       }
   },
   methods: {
-      connectMetamask() {
-          console.log('test');
-      }
+    async connectMetamask() {
+      const provider = new ethers.providers.Web3Provider(window.ethereum)
+      await provider.send("eth_requestAccounts", []);
+      const signer = provider.getSigner()
+      this.$store.commit('data/setSigner', signer);
+      console.log('Metamask successfully connected')
+    }
+  },
+  mounted() {
+    if (!this.signer) {
+      this.connectMetamask();
+    }
   }
 }
 </script>

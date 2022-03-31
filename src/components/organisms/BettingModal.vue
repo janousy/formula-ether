@@ -2,7 +2,7 @@
     <b-modal id="BettingModal" size="lg" hide-footer centered>
         <template #modal-header="{ close }">
             <div class="header">
-                <div>Bet on your team</div>
+                <div>Bet on {{team.displayName}}</div>
                 <div class="closeModalWrapper" @click="close()">
                     <i class="bi-x closingX"/>
                 </div>
@@ -29,7 +29,7 @@
                         :state="isNumberValid"
                         placeholder="amount"
                     />
-                    <b-button class="betButton" :disabled="isButtonDisabled" @click="betIsPlaced()">BET</b-button>
+                    <b-button class="betButton" :disabled="isButtonDisabled" @click="placeBet()">BET</b-button>
                 </b-row>
             </div>
         </template>
@@ -38,6 +38,8 @@
 
 <script>
 import DriverInformation from '@/components/atoms/DriverInformation.vue'
+import {mapState} from "vuex";
+import {sendBet} from "@/services/etherService";
 
 export default {
   /* eslint-disable semi */
@@ -51,6 +53,9 @@ export default {
     }
   },
   computed: {
+    ...mapState('data', {
+      signer: (state) => state.signer
+    }),
     getTeamLogo () {
       return `@/assets/images/teams/${this.team.key}.jpg`;
     },
@@ -62,6 +67,10 @@ export default {
     },
     isButtonDisabled () {
       return this.betAmount <= 0 || this.betAmount === null
+    },
+    placeBet () {
+      sendBet(this.betAmount, this.signer)
+      return null
     }
   },
   data: () => {
