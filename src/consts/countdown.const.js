@@ -2,7 +2,7 @@
 
 const countDownTimings = {
   countDownRunTime: 3 * 60,
-  countDownResetTime: 0
+  countDownResetTime: 10 * 1000,
 };
 
 export default countDownTimings

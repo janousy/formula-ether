@@ -3,7 +3,7 @@
         <img class="f1Logo" src="@/assets/images/f1/f1_logo.svg" alt="Formula 1 Logo">
         <span class="text">{{getAppHeaderText}}</span>
         <b-button :disabled="!!address" @click="connectMetamask()" class="metamaskButton">
-          Connect
+            {{getButtonText}}
         </b-button>
     </div>
 </template>
@@ -23,8 +23,14 @@ export default {
     ...mapState('data', {
       address: (state) => state.account
     }),
+      getButtonText () {
+          return this.address ? 'Connected' : 'Connect';
+      }
   },
   methods: {
+      connectMetamask() {
+          console.log('test');
+      }
   }
 }
 </script>

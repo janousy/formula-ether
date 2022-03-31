@@ -1,10 +1,8 @@
 <template>
     <div class="home">
         <AppHeader>
-
         </AppHeader>
         <RaceSetup>
-
         </RaceSetup>
         <b-button class="helpButton" v-b-modal.HelpModal>
             Help
@@ -52,8 +50,7 @@ export default {
         width: 100%;
         height: 100%;
         background-color: #38383f;
-        scroll-behavior: auto;
-        overflow: hidden;
+        overflow: auto;
         // background-color: #1f1f27;
         position: relative;
         .helpButton {
