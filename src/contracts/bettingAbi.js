@@ -96,6 +96,19 @@ const ABI = [
     type: "function"
   },
   {
+    inputs: [],
+    name: "getQuotes",
+    outputs: [
+      {
+        internalType: "string[]",
+        name: "",
+        type: "string[]"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
     inputs: [
       {
         internalType: "uint256",
@@ -242,6 +255,13 @@ const ABI = [
     type: "function"
   },
   {
+    inputs: [],
+    name: "set_winner",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function"
+  },
+  {
     inputs: [
       {
         internalType: "uint256",
@@ -268,7 +288,7 @@ const ABI = [
         type: "uint256"
       }
     ],
-    name: "teamNamesQuali",
+    name: "teamNamesQuotes",
     outputs: [
       {
         internalType: "string",
