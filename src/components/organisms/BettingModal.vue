@@ -53,7 +53,7 @@ export default {
   computed: {
     ...mapState('data', {
       signer: (state) => state.signer,
-      isBetPlaced: (state) => state.isBetPlaced
+      betIsPlaced: (state) => state.betIsPlaced
     }),
     getTeamLogo () {
       return require(`@/assets/images/teams/${this.team.key}.jpg`);
@@ -76,9 +76,10 @@ export default {
   methods: {
     async placeBet() {
       await sendBet(this.betAmount, this.signer);
-      this.$store.commit("data/setBetIsPlaced", true)
-      let winners = await getWinners(this.signer)
-      this.$store.commit("data/setWinners", winners)
+      this.$store.commit("data/setBetIsPlaced", true);
+      this.$store.commit('data/setRaceStatus', 1);
+      let winners = await getWinners(this.signer);
+      this.$store.commit("data/setWinners", winners);
       return null;
     }
   }

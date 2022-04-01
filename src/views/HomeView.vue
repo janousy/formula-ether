@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 import AppHeader from "../components/organisms/AppHeader";
 import RaceSetup from "../components/organisms/RaceSetup";
 import HelpModal from "../components/organisms/HelpModal";
@@ -23,20 +22,13 @@ export default {
 
   name: 'HomeView',
   components: { HelpModal, RaceSetup, AppHeader },
-  computed: {
-    ...mapState('data', {
-      counter: (state) => state.counter
-    })
-  },
+  computed: {},
   data: () => {
     return {
       showHelpModal: false
     }
   },
   mounted () {
-    console.log(this.counter);
-    this.$store.commit('data/incrementCounter');
-    console.log(this.counter)
   },
   props: {},
   methods: {}

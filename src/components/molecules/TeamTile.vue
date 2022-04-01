@@ -12,6 +12,8 @@
 
 <script>
 
+import {mapState} from "vuex";
+
 export default {
   name: 'TeamTile',
   props: {
@@ -23,7 +25,11 @@ export default {
   computed: {
     getTeamIcon () {
       return require(`@/assets/images/teams/${this.team.key}.jpg`);
-    }
+    },
+    ...mapState('data', {
+      signer: (state) => state.signer,
+      isBetPlaced: (state) => state.isBetPlaced
+    }),
   },
   methods: {
       getQuote() {

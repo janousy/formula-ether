@@ -1,7 +1,7 @@
 <template>
     <div>
         <RaceHeader/>
-        <div v-if="!betIsPlaced" class="teamsWrapper">
+        <div v-if="getRaceStatus === 1" class="teamsWrapper">
             <TeamTile
                 v-for="(team, index) in getTeams"
                 :key="`team${index}`"
@@ -15,9 +15,8 @@
             </div>
             <betting-modal :team="getTeams[selectedTeam]"/>
         </div>
-        <div v-if="betIsPlaced">
-            <RaceEnding/>
-        </div>
+        <RaceWaiting v-if="getRaceStatus === 1"/>
+        <RaceEnding v-if="getRaceStatus === 0"/>
     </div>
 </template>
 
@@ -26,18 +25,23 @@ import RaceHeader from "../molecules/RaceHeader";
 import TeamTile from "../molecules/TeamTile";
 import BettingModal from "./BettingModal";
 import { mapState } from 'vuex'
-import RaceEnding from "../molecules/RaceEnding";
+import RaceWaiting from "../molecules/RaceWaiting";
 import f1MetaData from "../../consts/f1-meta";
+import RaceEnding from "../molecules/RaceEnding";
 
 export default {
   name: 'RaceSetup',
-  components: { RaceEnding, BettingModal, TeamTile, RaceHeader },
+  components: {RaceEnding, RaceWaiting, BettingModal, TeamTile, RaceHeader },
   computed: {
     ...mapState('data', {
       betIsPlaced: (state) => state.betIsPlaced,
+      raceStatus: (state) => state.raceStatus,
     }),
     getTeams () {
       return f1MetaData.teams
+    },
+    getRaceStatus() {
+        return this.raceStatus;
     }
   },
   data: () => {

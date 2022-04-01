@@ -1,9 +1,9 @@
 // Initial state
 /* eslint-disable semi */
 
+// race status: 0 for setting bet, 1 for bet is set and waiting, 2 for winner
 const moduleState = {
-  counter: 0,
-  raceIsRunning: false,
+  raceStatus: 0,
   signer: null,
   raceWinningTeam: '',
   betIsPlaced: false,
@@ -17,14 +17,8 @@ const actions = {
 };
 
 const mutations = {
-  setCounter (state, counter) {
-    state.counter = counter
-  },
-  incrementCounter (state) {
-    state.counter += 1
-  },
-  setRaceIsRunning (state, raceIsRunning) {
-    state.raceIsRunning = raceIsRunning;
+  setRaceStatus (state, raceStatus) {
+    state.raceStatus = raceStatus;
   },
   setSigner (state, signer) {
     state.signer = signer;

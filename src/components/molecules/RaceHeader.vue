@@ -6,7 +6,7 @@
             </div>
             <div class="textWrapper">
                 <span>{{getRaceName}}</span>
-                <span>Total Bets: {{getTotalBets()}} Ether</span>
+                <span>Total Bets: {{totalBets}} Ether</span>
             </div>
 
         </div>
@@ -15,40 +15,46 @@
 </template>
 
 <script>
-import raceLocations from "../../consts/raceLocations.const";
-import Timer from "../atoms/Timer";
+    import raceLocations from "../../consts/raceLocations.const";
+    import Timer from "../atoms/Timer";
+    import {getTotalAmount} from "../../services/etherService";
+    import {mapState} from "vuex";
 
-export default {
+    export default {
   name: 'RaceHeader',
   components: { Timer },
   computed: {
+    ...mapState('data', {
+      signer: (state) => state.signer,
+    }),
     getRaceImage () {
       return require(`@/assets/images/raceTracks/${raceLocations.locations[this.raceCounter]}.png`);
     },
     getRaceName () {
       return raceLocations.raceName[this.raceCounter];
-
     }
   },
   data: () => {
     return {
-      raceCounter: 0
+      raceCounter: 0,
+      totalBets: 0,
     }
   },
   mounted () {
+      console.log('mounted')
+      this.getTotalBets()
   },
   methods: {
     callContractStartRace () {
       console.log('contract starts race');
-        this.$store.commit('data/setRaceIsRunning', true)
     },
     updateRaceLocation () {
       console.log('race location is updated');
       this.raceCounter = (this.raceCounter + 1) % raceLocations.raceName.length;
-      this.$store.commit('data/setRaceIsRunning', false);
+      this.$store.commit('data/setBetIsPlaced', false);
     },
-    getTotalBets() {
-        return 10;
+    async getTotalBets() {
+        this.totalBets = await getTotalAmount(this.signer);
     }
   }
 }

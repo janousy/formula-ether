@@ -33,7 +33,7 @@ export default {
     async connectMetamask() {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       await provider.send("eth_requestAccounts", []);
-      const signer = provider.getSigner()
+      const signer = provider.getSigner();
       this.$store.commit('data/setSigner', signer);
       console.log('Metamask successfully connected')
     }
@@ -53,7 +53,6 @@ export default {
         width: 100%;
         height: 71px;
         background-color: #e10600;
-        padding-left: 50px;
         position: sticky;
         top: 0;
         z-index: 5;
