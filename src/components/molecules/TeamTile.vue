@@ -2,7 +2,8 @@
     <div class="teamTile">
         <div class="textWrapper">
             <div class="teamName">{{team.displayName}}</div>
-            <div class="quote">Quote = {{getQuote()}}</div>
+            <div class="quote">Payout = {{getQuote}}</div>
+            <div class="quote">Qualifying = {{getQualifyingPosition}}</div>
         </div>
         <div class="imageWrapper">
             <img class="teamIcon" :src="getTeamIcon" alt="TeamIcon">
@@ -11,31 +12,57 @@
 </template>
 
 <script>
-
-import {mapState} from "vuex";
-
 export default {
   name: 'TeamTile',
   props: {
     team: {
       type: Object,
       required: true
+    },
+    totalAmounts: {
+        type: Array,
+        required: true,
+    },
+    totalBetSum: {
+        type: Number,
+        required: true,
+    },
+    qualifyingResults: {
+        type: Array,
+        required: true,
+    },
+    indexNumber: {
+        type: Number,
+        required: true,
     }
   },
   computed: {
     getTeamIcon () {
       return require(`@/assets/images/teams/${this.team.key}.jpg`);
     },
-    ...mapState('data', {
-      signer: (state) => state.signer,
-      isBetPlaced: (state) => state.isBetPlaced
-    }),
+    getQuote () {
+        if (this.totalBetSum === 0){
+            return 0;
+        }
+        return (1 + this.totalAmounts[this.indexNumber] / this.totalBetSum).toFixed(2);
+    },
+    getQualifyingPosition () {
+        const qualiResult = this.qualifyingResults.indexOf(this.team.key) + 1;
+        let textAdding = '';
+        switch (qualiResult) {
+            case 1:
+                textAdding = 'st';
+                break;
+            case 2:
+                textAdding = 'nd';
+                break;
+            default:
+                textAdding = 'th';
+                break;
+        }
+        return `${qualiResult}${textAdding}`
+    }
   },
-  methods: {
-      getQuote() {
-          return 0;
-      }
-  }
 }
 </script>
 

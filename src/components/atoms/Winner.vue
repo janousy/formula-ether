@@ -1,6 +1,6 @@
 <template>
     <div>
-        <span>{{address}}</span>
+        <span>{{address}}:</span>
         <span class="amount">{{amount}} Ether</span>
     </div>
 </template>

@@ -1,4 +1,3 @@
-/* tslint:disable */
 pragma solidity >0.6.4;
 pragma experimental ABIEncoderV2;
 //compiler 0.7.0
@@ -12,7 +11,8 @@ contract Betting{
 
     address payable[] public players;
 
-    string[] public teamNames;
+    string[] public teamNamesFix;
+    string[] public teamNamesQuotes;
     string public teamWinner;
 
     struct Player {
@@ -26,27 +26,25 @@ contract Betting{
 
     constructor() public {
         minimumBet = 100000000000000;
-        teamNames = ["AlfaRomeo", "AlphaTauri", "Alpine", "AstonMartin", "Ferrari",
-    "Haas","McLaren", "Mercedes","RedBull","Williams"];
+        // teamNames = ["alfa_romeo", "alpha_tauri", "alpine", "aston_martin", "ferrari",
+        //"haas","mclaren", "mercedes","redbull","williams"];
+        teamNamesQuotes = ["alfa_romeo", "alfa_romeo", "alfa_romeo", "alpha_tauri", "alpine", "aston_martin", "ferrari",
+        "haas","mclaren", "mercedes","redbull", "redbull", "redbull", "redbull","williams"];
+        teamNamesFix = ["alfa_romeo", "alpha_tauri", "alpine", "aston_martin", "ferrari",
+        "haas","mclaren", "mercedes","redbull","williams"];
     }
 
-    function getTeamName(uint256 index) public view returns (string memory) {
-        return teamNames[index];
-    }
 
-    function getAllTeamNames() public view returns (string[] memory) {
-        return teamNames;
-    }
 
     function random(uint number) public view returns (uint){
         return uint(keccak256(abi.encodePacked(block.timestamp,block.difficulty,
-        msg.sender))) % number;
+            msg.sender))) % number;
     }
 
     function set_winner() public payable{
-    // extract random index of winner
-    // create list of 10 team makers
-        teamWinner = teamNames[random(teamNames.length)];
+        // extract random index of winner
+        // create list of 10 team makers
+        teamWinner = teamNamesQuotes[random(teamNamesQuotes.length)];
     }
 
     function get_winner() public view returns (string memory) {
@@ -67,7 +65,7 @@ contract Betting{
 
         //The second one is used to see if the value sended by the player is
         //Higher than the minum value
-       // require(msg.value >= minimumBet);
+        // require(msg.value >= minimumBet);
 
         //We set the player informations : amount of the bet and selected team
         playerInfo[msg.sender].amountBet = msg.value;
@@ -77,8 +75,8 @@ contract Betting{
         players.push(msg.sender);
 
         //at the end, we increment the stakes of the team selected with the player bet
-        for (uint i=0; i<teamNames.length; i++){
-            if (keccak256(abi.encodePacked(_teamSelected)) == keccak256(abi.encodePacked(teamNames[i]))){
+        for (uint i=0; i<teamNamesFix.length; i++){
+            if (keccak256(abi.encodePacked(_teamSelected)) == keccak256(abi.encodePacked(teamNamesFix[i]))){
                 totalBets[i] += msg.value;
             }
         }
@@ -94,19 +92,31 @@ contract Betting{
         address add;
         uint256 bet_amount;
         address payable playerAddress;
+
+
+        //delete playerInfoInstance; // Delete all the players
+        delete players; // Delete all the players array
+        delete winners; //Delete all winning players
+        LoserBet = 0; //reinitialize the bets
+        WinnerBet = 0;
+        delete totalBets;
+
+        //set the winner team
+        teamWinner = teamNamesQuotes[random(teamNamesQuotes.length)];
+
         //We loop through the player array to check who selected the winner team
         for(uint i = 0; i < players.length; i++){
             playerAddress = players[i];
             //If the player selected the winner team
             //We add his address to the winners array
-            if(keccak256(abi.encodePacked(playerInfo[playerAddress].teamSelected)) == keccak256(abi.encodePacked(get_winner()))){
+            if(keccak256(abi.encodePacked(playerInfo[playerAddress].teamSelected)) == keccak256(abi.encodePacked(teamWinner))){
                 winners[count] = playerAddress;
                 count++;
             }
         }
         //We define which bet sum is the Loser one and which one is the winner
-        for(uint i=0; i<teamNames.length; i++){
-            if (keccak256(abi.encodePacked(teamNames[i])) == keccak256(abi.encodePacked(get_winner()))){
+        for(uint i=0; i<teamNamesFix.length; i++){
+            if (keccak256(abi.encodePacked(teamNamesFix[i])) == keccak256(abi.encodePacked(teamWinner))){
                 WinnerBet = totalBets[i];
             }else{
                 LoserBet += totalBets[i];
@@ -118,16 +128,11 @@ contract Betting{
             // Check that the address in this fixed array is not empty
             if(winners[j] != address(0))
                 add = winners[j];
-                bet_amount = playerInfo[add].amountBet;
-                //Transfer the money to the user
-                winners[j].transfer((bet_amount*(10000+(LoserBet*10000/WinnerBet)))/10000 );
+            bet_amount = playerInfo[add].amountBet;
+            //Transfer the money to the user, Formula has to be adjusted
+            winners[j].transfer((bet_amount*(10000+(LoserBet*10000/WinnerBet)))/10000 );
         }
 
-        delete playerInfo[playerAddress]; // Delete all the players
-        delete players[players.length-1]; // Delete all the players array
-        LoserBet = 0; //reinitialize the bets
-        WinnerBet = 0;
-        delete totalBets[totalBets.length-1];//why you want to delete the value of the last item in this array?
 
     }
 
@@ -144,4 +149,41 @@ contract Betting{
         return totalBets;
     }
 
+    //returns a list with all players who have won
+    function getWinnerPlayers() public view returns(address payable[20] memory) {
+        address payable playerAddress;
+        address payable[20] memory winners;
+        uint256 count = 0; // This is the count for the array of winners
+        //We loop through the player array to check who selected the winner team
+        for(uint i = 0; i < players.length; i++){
+            playerAddress = players[i];
+            //If the player selected the winner team
+            //We add his address to the winners array
+            if(keccak256(abi.encodePacked(playerInfo[playerAddress].teamSelected)) == keccak256(abi.encodePacked(get_winner()))){
+                winners[count] = playerAddress;
+                count++;
+            }
+        }
+        return winners;
+
+    }
+
+    //return all players
+    function getPlayers() public view returns (address payable[] memory) { return players; }
+
+
+    //returns the team name in the list on index position
+    function getTeamName(uint256 index) public view returns (string memory) {
+        return teamNamesFix[index];
+    }
+
+    //get all teams back
+    function getAllTeamNames() public view returns (string[] memory) {
+        return teamNamesFix;
+    }
+
+    //get the list to calculate the Quotes
+    function getQuotes() public view returns (string[] memory) {
+        return teamNamesQuotes;
+    }
 }

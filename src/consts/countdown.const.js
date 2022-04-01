@@ -1,8 +1,8 @@
 /* eslint-disable semi */
 
 const countDownTimings = {
-  countDownRunTime: 10 * 60,
-  countDownResetTime: 10 * 1000,
+  countDownResetTime: 60 * 1000, // 1 minute
+  timeUntilRaceStarts: 5 * 60, // 10 minutes
 };
 
 export default countDownTimings

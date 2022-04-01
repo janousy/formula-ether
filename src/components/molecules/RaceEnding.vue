@@ -1,16 +1,13 @@
 <template>
     <div>
-        <div class="videoWrapper">
-
-        </div>
         <div class="winnersWrapper">
             <div class="winnerTitle">Winning Team: {{raceWinningTeam}}</div>
             <Winner
                     class="winners"
-                    v-for="(winner, index) in winners"
+                    v-for="(winner, index) in getRaceWinners"
                     :key="index"
                     :address="winner"
-                    :amount="amounts[index]"
+                    :amount="getWinnersAmounts[index]"
             >
             </Winner>
         </div>
@@ -20,7 +17,7 @@
 <script>
 import Winner from "../atoms/Winner";
 import {mapState} from "vuex";
-import countDownTimings from "../../consts/countdown.const";
+import f1MetaData from "../../consts/f1-meta";
 
 export default {
     name: "RaceEnding",
@@ -28,19 +25,20 @@ export default {
     props: {},
     computed: {
         ...mapState('data', {
-            raceWinningTeam: (state) => state.raceWinningTeam
+            raceWinningTeam: (state) => state.raceWinningTeam,
+            raceWinningPlayers: (state) => state.raceWinningPlayers,
         }),
+        getRaceWinningTeam() {
+            // TODO fix function to show display name
+            return f1MetaData
+        },
+        getRaceWinners() {
+            return this.raceWinningPlayers;
+        },
+        getWinnersAmounts() {
+            return []
+        },
     },
-    data: () => {
-        return {
-            winners: [],
-            timerCount: countDownTimings.countDownRunTime,
-            amounts: ['1', '2', '3'],
-            ...mapState('data', {
-                winners: state => state.winners
-            }),
-        }
-    }
 }
 </script>
 
@@ -64,7 +62,7 @@ export default {
         .winners {
             font-family: F1-Regular;
             font-size: 30px;
-            width: 1200px;
+            width: 60%;
             display: flex;
             justify-content: space-between;
         }

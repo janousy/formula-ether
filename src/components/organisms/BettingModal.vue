@@ -23,11 +23,11 @@
                 </b-row>
                 <b-row class="secondRow" align-v="center">
                     <b-form-input
-                        class="betInput"
-                        type="number"
-                        v-model="betAmount"
-                        :state="isNumberValid"
-                        placeholder="amount"
+                            class="betInput"
+                            type="number"
+                            v-model="betAmount"
+                            :state="isNumberValid"
+                            placeholder="amount"
                     />
                     <b-button class="betButton" :disabled="isButtonDisabled" @click="placeBet()">BET</b-button>
                 </b-row>
@@ -37,64 +37,67 @@
 </template>
 
 <script>
-import DriverInformation from "../atoms/DriverInformation";
-import {mapState} from "vuex";
-import {getWinners, sendBet} from "../../services/etherService";
+    import DriverInformation from "../atoms/DriverInformation";
+    import {mapState} from "vuex";
+    // eslint-disable-next-line no-unused-vars
+    import {getTotalAmount, sendBet} from "../../services/etherService";
+    import {etherConversions} from "../../consts/etherConversions.const";
 
-export default {
-  name: 'BettingModal',
-  components: { DriverInformation },
-  props: {
-    team: {
-      type: Object,
-      required: true
+    export default {
+        name: 'BettingModal',
+        components: {DriverInformation},
+        props: {
+            team: {
+                type: Object,
+                required: true
+            }
+        },
+        computed: {
+            ...mapState('data', {
+                signer: (state) => state.signer,
+                betIsPlaced: (state) => state.betIsPlaced,
+                timerLessThan30s: (state) => state.timerLessThan30s,
+            }),
+            getTeamLogo() {
+                return require(`@/assets/images/teams/${this.team.key}.jpg`);
+            },
+            isNumberValid() {
+                if (this.betAmount === null) {
+                    return null;
+                }
+                return this.betAmount > 0;
+            },
+            isButtonDisabled() {
+                return this.betAmount <= 0 || this.betAmount === null || this.timerLessThan30s;
+            },
+        },
+        data: () => {
+            return {
+                betAmount: null
+            }
+        },
+        methods: {
+            async placeBet() {
+                // TODO nur möglich wenn es noch 30sekunden dauert
+                await sendBet(this.betAmount * etherConversions.toMetamask, this.team, this.signer);
+                this.$store.commit("data/setBetIsPlaced", true);
+                this.$store.commit('data/setRaceStatus', 1);
+                this.$bvModal.hide('BettingModal');
+            },
+        }
     }
-  },
-  computed: {
-    ...mapState('data', {
-      signer: (state) => state.signer,
-      betIsPlaced: (state) => state.betIsPlaced
-    }),
-    getTeamLogo () {
-      return require(`@/assets/images/teams/${this.team.key}.jpg`);
-    },
-    isNumberValid () {
-      if (this.betAmount === null) {
-        return null;
-      }
-      return this.betAmount > 0;
-    },
-    isButtonDisabled () {
-      return this.betAmount <= 0 || this.betAmount === null;
-    },
-  },
-  data: () => {
-    return {
-      betAmount: null
-    }
-  },
-  methods: {
-    async placeBet() {
-      await sendBet(this.betAmount, this.signer);
-      this.$store.commit("data/setBetIsPlaced", true);
-      this.$store.commit('data/setRaceStatus', 1);
-      let winners = await getWinners(this.signer);
-      this.$store.commit("data/setWinners", winners);
-      return null;
-    }
-  }
-}
 </script>
 
 <style lang="scss" scoped>
     @import "src/styles/fonts.scss";
 
-    .header{
+    .header {
         font-family: F1-Bold;
         font-size: 30px;
         color: white;
         width: 100%;
         position: relative;
+
         .closeModalWrapper {
             height: 100%;
             text-align: center;
@@ -104,31 +107,37 @@ export default {
             right: 0;
             margin-top: -14px;
             cursor: pointer;
-            .closingX{
+
+            .closingX {
                 font-size: 45px;
             }
         }
     }
-    .mainContent{
+
+    .mainContent {
         font-family: F1-Regular;
         font-size: 20px;
         height: 400px;
         color: white;
         white-space: pre-line;
         position: relative;
+
         .teamLogo {
             width: 200px;
             object-fit: contain;
             position: absolute;
             right: 0;
         }
+
         .secondRow {
             flex-direction: column;
+
             .betButton {
                 font-family: F1-Bold;
                 font-size: 25px;
                 width: 200px;
             }
+
             .betInput {
                 font-family: F1-Bold;
                 font-size: 25px;

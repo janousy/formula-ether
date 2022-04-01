@@ -1,5 +1,5 @@
 const addressesConst = {
-  bettingAddress: '0xe46282Ae6396394F007e7DA929961eE925Bd163D'
-}
+  bettingAddress: '0x33969685D3cACBaAaBE06B2c103e0090F31446A0'
+};
 
 export default addressesConst

@@ -33,12 +33,14 @@ export default {
     async connectMetamask() {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       await provider.send("eth_requestAccounts", []);
+      const accountsList = await provider.listAccounts();
       const signer = provider.getSigner();
       this.$store.commit('data/setSigner', signer);
+      this.$store.commit('data/setAddress', accountsList[0]);
       console.log('Metamask successfully connected')
     }
   },
-  mounted() {
+  created() {
     if (!this.signer) {
       this.connectMetamask();
     }

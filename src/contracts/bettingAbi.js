@@ -1,277 +1,336 @@
 const ABI = [
   {
+    inputs: [],
+    stateMutability: "nonpayable",
+    type: "constructor"
+  },
+  {
     inputs: [
       {
-        internalType: 'string',
-        name: '_teamSelected',
-        type: 'string'
+        internalType: "string",
+        name: "_teamSelected",
+        type: "string"
       }
     ],
-    name: 'bet',
+    name: "bet",
     outputs: [],
-    stateMutability: 'payable',
-    type: 'function'
+    stateMutability: "payable",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "player",
+        type: "address"
+      }
+    ],
+    name: "checkPlayerExists",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
   },
   {
     inputs: [],
-    name: 'distributePrizes',
+    name: "distributePrizes",
     outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function'
+    stateMutability: "nonpayable",
+    type: "function"
   },
   {
     inputs: [],
-    name: 'set_winner',
-    outputs: [],
-    stateMutability: 'payable',
-    type: 'function'
+    name: "getAllTeamNames",
+    outputs: [
+      {
+        internalType: "string[]",
+        name: "",
+        type: "string[]"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
   },
   {
     inputs: [],
-    stateMutability: 'nonpayable',
-    type: 'constructor'
+    name: "getAmounts",
+    outputs: [
+      {
+        internalType: "uint256[]",
+        name: "",
+        type: "uint256[]"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "getAmounts2",
+    outputs: [
+      {
+        internalType: "uint256[10]",
+        name: "",
+        type: "uint256[10]"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "getPlayers",
+    outputs: [
+      {
+        internalType: "address payable[]",
+        name: "",
+        type: "address[]"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "getQuotes",
+    outputs: [
+      {
+        internalType: "string[]",
+        name: "",
+        type: "string[]"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: 'player',
-        type: 'address'
+        internalType: "uint256",
+        name: "index",
+        type: "uint256"
       }
     ],
-    name: 'checkPlayerExists',
+    name: "getTeamName",
     outputs: [
       {
-        internalType: 'bool',
-        name: '',
-        type: 'bool'
+        internalType: "string",
+        name: "",
+        type: "string"
       }
     ],
-    stateMutability: 'view',
-    type: 'function'
+    stateMutability: "view",
+    type: "function"
   },
   {
     inputs: [],
-    name: 'get_winner',
+    name: "getWinnerPlayers",
     outputs: [
       {
-        internalType: 'string',
-        name: '',
-        type: 'string'
+        internalType: "address payable[20]",
+        name: "",
+        type: "address[20]"
       }
     ],
-    stateMutability: 'view',
-    type: 'function'
+    stateMutability: "view",
+    type: "function"
   },
   {
     inputs: [],
-    name: 'getAllTeamNames',
+    name: "get_winner",
     outputs: [
       {
-        internalType: 'string[]',
-        name: '',
-        type: 'string[]'
+        internalType: "string",
+        name: "",
+        type: "string"
       }
     ],
-    stateMutability: 'view',
-    type: 'function'
+    stateMutability: "view",
+    type: "function"
   },
   {
     inputs: [],
-    name: 'getAmounts',
+    name: "maxAmountOfBets",
     outputs: [
       {
-        internalType: 'uint256[]',
-        name: '',
-        type: 'uint256[]'
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
       }
     ],
-    stateMutability: 'view',
-    type: 'function'
+    stateMutability: "view",
+    type: "function"
   },
   {
     inputs: [],
-    name: 'getAmounts2',
+    name: "minimumBet",
     outputs: [
       {
-        internalType: 'uint256[10]',
-        name: '',
-        type: 'uint256[10]'
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
       }
     ],
-    stateMutability: 'view',
-    type: 'function'
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "numberOfBets",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
   },
   {
     inputs: [
       {
-        internalType: 'uint256',
-        name: 'index',
-        type: 'uint256'
+        internalType: "address",
+        name: "",
+        type: "address"
       }
     ],
-    name: 'getTeamName',
+    name: "playerInfo",
     outputs: [
       {
-        internalType: 'string',
-        name: '',
-        type: 'string'
-      }
-    ],
-    stateMutability: 'view',
-    type: 'function'
-  },
-  {
-    inputs: [],
-    name: 'maxAmountOfBets',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256'
-      }
-    ],
-    stateMutability: 'view',
-    type: 'function'
-  },
-  {
-    inputs: [],
-    name: 'minimumBet',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256'
-      }
-    ],
-    stateMutability: 'view',
-    type: 'function'
-  },
-  {
-    inputs: [],
-    name: 'numberOfBets',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256'
-      }
-    ],
-    stateMutability: 'view',
-    type: 'function'
-  },
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: '',
-        type: 'address'
-      }
-    ],
-    name: 'playerInfo',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: 'amountBet',
-        type: 'uint256'
+        internalType: "uint256",
+        name: "amountBet",
+        type: "uint256"
       },
       {
-        internalType: 'string',
-        name: 'teamSelected',
-        type: 'string'
+        internalType: "string",
+        name: "teamSelected",
+        type: "string"
       }
     ],
-    stateMutability: 'view',
-    type: 'function'
+    stateMutability: "view",
+    type: "function"
   },
   {
     inputs: [
       {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256'
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
       }
     ],
-    name: 'players',
+    name: "players",
     outputs: [
       {
-        internalType: 'address payable',
-        name: '',
-        type: 'address'
+        internalType: "address payable",
+        name: "",
+        type: "address"
       }
     ],
-    stateMutability: 'view',
-    type: 'function'
+    stateMutability: "view",
+    type: "function"
   },
   {
     inputs: [
       {
-        internalType: 'uint256',
-        name: 'number',
-        type: 'uint256'
+        internalType: "uint256",
+        name: "number",
+        type: "uint256"
       }
     ],
-    name: 'random',
+    name: "random",
     outputs: [
       {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256'
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
       }
     ],
-    stateMutability: 'view',
-    type: 'function'
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256'
-      }
-    ],
-    name: 'teamNames',
-    outputs: [
-      {
-        internalType: 'string',
-        name: '',
-        type: 'string'
-      }
-    ],
-    stateMutability: 'view',
-    type: 'function'
+    stateMutability: "view",
+    type: "function"
   },
   {
     inputs: [],
-    name: 'teamWinner',
-    outputs: [
-      {
-        internalType: 'string',
-        name: '',
-        type: 'string'
-      }
-    ],
-    stateMutability: 'view',
-    type: 'function'
+    name: "set_winner",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function"
   },
   {
     inputs: [
       {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256'
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
       }
     ],
-    name: 'totalBets',
+    name: "teamNamesFix",
     outputs: [
       {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256'
+        internalType: "string",
+        name: "",
+        type: "string"
       }
     ],
-    stateMutability: 'view',
-    type: 'function'
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    name: "teamNamesQuotes",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "teamWinner",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    name: "totalBets",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
   }
-]
+];
+
 export default ABI

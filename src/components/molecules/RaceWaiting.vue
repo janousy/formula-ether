@@ -6,30 +6,21 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import countDownTimings from "@/consts/countdown.const";
-import {waitingText} from "../../consts/waitingTexts.consts";
+
+import { texts } from "../../consts/generalTexts.consts";
 
 export default {
-  name: 'RaceWaiting',
-  components: {},
-  props: {},
-  computed: {
-    ...mapState('data', {
-      raceWinningTeam: (state) => state.raceWinningTeam
-    }),
-    getRaceLoadGif () {
-        return require('@/assets/images/general/race-load-icon.gif');
+    name: 'RaceWaiting',
+    components: {},
+    props: {},
+    computed: {
+        getRaceLoadGif() {
+            return require('@/assets/images/general/race-load-icon.gif');
+        },
+        getWaitingText() {
+            return texts.waitingText;
+        }
     },
-    getWaitingText () {
-        return waitingText;
-    }
-  },
-  data: () => {
-    return {
-      timerCount: countDownTimings.countDownRunTime,
-    }
-  }
 }
 </script>
 
