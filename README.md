@@ -20,7 +20,7 @@ To connect to the UZHETH blockchain the following credentials can be used:
 
 
 
-Alternatively, your can run Ganache locally. The [contarct](https://github.com/janousy/formula-ether/blob/999193c500040612153204c28767041a0845942d/src/contracts/bettingContract.sol) 
+Alternatively, your can run Ganache locally. The [contract](https://github.com/janousy/formula-ether/blob/999193c500040612153204c28767041a0845942d/src/contracts/bettingContract.sol) 
 can be deployed with e.g. [Remix IDE](remix.ethereum.org) by adding the local Ganache network to Metamask and the selecting `Injected Web3`
 as the environment upon deploying the contract.
 
