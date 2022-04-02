@@ -10,6 +10,11 @@
     border: none;
 }
 
+.modal-footer {
+    background-color: #1f1f27;
+    border-top: 1px solid #1f1f27;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;

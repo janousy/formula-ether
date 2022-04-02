@@ -3,21 +3,29 @@ import addressesConst from "@/consts/addresses.const";
 import ABI from "@/contracts/bettingAbi";
 
 export async function sendBet(ethAmount, team, signer) {
+    if (!signer) {
+        console.warn('No signer found');
+    }
     const bettingAddress = addressesConst.bettingAddress;
     const bettingContract = new ethers.Contract(bettingAddress, ABI, signer);
-    console.log('calling contract to place bet');
+    console.log('Calling contract to place bet');
     try {
         let response = await bettingContract.bet(team.key, {value: ethAmount});
         console.log(response)
+        return 1;
     } catch (ex) {
         console.warn(ex)
+        return -1;
     }
 }
 
 export async function distributePrices(signer) {
+    if (!signer) {
+        console.warn('No signer found');
+    }
     const bettingAddress = addressesConst.bettingAddress;
     const bettingContract = new ethers.Contract(bettingAddress, ABI, signer);
-    console.log('calling contract to start race');
+    console.log('Calling contract to start race');
     try {
         let response = await bettingContract.distributePrizes();
         console.log(response)
@@ -27,9 +35,12 @@ export async function distributePrices(signer) {
 }
 
 export async function getAllPlayers(signer) {
+    if (!signer) {
+        console.warn('No signer found');
+    }
     const bettingAddress = addressesConst.bettingAddress;
     const bettingContract = new ethers.Contract(bettingAddress, ABI, signer);
-    console.log('calling contract for all players');
+    console.log('Calling contract for all players');
     try {
         return await bettingContract.getPlayers();
     } catch (ex) {
@@ -38,9 +49,12 @@ export async function getAllPlayers(signer) {
 }
 
 export async function getWinningPlayers(signer) {
+    if (!signer) {
+        console.warn('No signer found');
+    }
     const bettingAddress = addressesConst.bettingAddress;
     const bettingContract = new ethers.Contract(bettingAddress, ABI, signer);
-    console.log('calling contract to get winning players');
+    console.log('Calling contract to get winning players');
     try {
         return await bettingContract.getWinnerPlayers()
     } catch (ex) {
@@ -49,9 +63,12 @@ export async function getWinningPlayers(signer) {
 }
 
 export async function getWinningTeam(signer) {
+    if (!signer) {
+        console.warn('No signer found');
+    }
     const bettingAddress = addressesConst.bettingAddress;
     const bettingContract = new ethers.Contract(bettingAddress, ABI, signer);
-    console.log('calling contract to get winning Team');
+    console.log('Calling contract to get winning Team');
     try {
         return await bettingContract.get_winner()
     } catch (ex) {
@@ -60,6 +77,9 @@ export async function getWinningTeam(signer) {
 }
 
 export async function getTotalAmount(signer) {
+    if (!signer) {
+        console.warn('No signer found');
+    }
     const bettingAddress = addressesConst.bettingAddress;
     const bettingContract = new ethers.Contract(bettingAddress, ABI, signer);
     console.log('Calling contract for totalBetAmount');

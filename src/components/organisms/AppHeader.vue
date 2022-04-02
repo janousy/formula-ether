@@ -1,33 +1,38 @@
 <template>
-    <div class="AppHeaderWrapper">
-        <img class="f1Logo" :src="getf1Logo" alt="Formula 1 Logo">
-        <span class="text">{{getAppHeaderText}}</span>
-        <b-button :disabled="!!signer" @click="connectMetamask()" class="metamaskButton">
-          {{getButtonText}}
-        </b-button>
-    </div>
+  <div class="AppHeaderWrapper">
+    <img class="f1Logo" :src="getF1Logo" alt="Formula 1 Logo">
+    <span class="text">{{ getAppHeaderText }}</span>
+    <b-button :disabled="!!signer" @click="connectMetamask()" class="metamaskButton">
+      {{ getButtonText }}
+    </b-button>
+  </div>
 </template>
 
 <script>
 import headerTexts from "../../consts/headerTexts.const";
-import { mapState } from 'vuex'
+import {mapState} from 'vuex'
 import {ethers} from "ethers";
 
 export default {
   name: 'AppHeader',
   computed: {
-    getf1Logo(){
-        return require('@/assets/images/f1/f1_logo.svg');
-    },
-    getAppHeaderText () {
-      return headerTexts.appHeaderTexts[0]
-    },
-    ...mapState('data', {
+    ...mapState('etherStore', {
       signer: state => state.signer,
     }),
-      getButtonText () {
-          return this.signer ? 'Connected' : 'Connect';
-      }
+    getF1Logo() {
+      return require('@/assets/images/f1/f1_logo.svg');
+    },
+    getAppHeaderText() {
+      return headerTexts.appHeaderTexts[0]
+    },
+    getButtonText() {
+      return this.signer ? 'Connected' : 'Connect';
+    }
+  },
+  created() {
+    if (!this.signer) {
+      this.connectMetamask();
+    }
   },
   methods: {
     async connectMetamask() {
@@ -35,52 +40,50 @@ export default {
       await provider.send("eth_requestAccounts", []);
       const accountsList = await provider.listAccounts();
       const signer = provider.getSigner();
-      this.$store.commit('data/setSigner', signer);
-      this.$store.commit('data/setAddress', accountsList[0]);
+      this.$store.commit('etherStore/setSigner', signer);
+      this.$store.commit('etherStore/setAddress', accountsList[0]);
       console.log('Metamask successfully connected')
     }
   },
-  created() {
-    if (!this.signer) {
-      this.connectMetamask();
-    }
-  }
 }
 </script>
 
 <style lang="scss" scoped>
-    @import "src/styles/fonts.scss";
+@import "src/styles/fonts.scss";
 
-    .AppHeaderWrapper{
-        width: 100%;
-        height: 71px;
-        background-color: #e10600;
-        position: sticky;
-        top: 0;
-        z-index: 5;
-        .f1Logo{
-            display: inline-block;
-            vertical-align: top;
-            width: 130px;
-            margin: 19px 30px 12px;
-        }
-        .text {
-            display: inline-block;
-            font-size: 35px;
-            font-weight: bolder;
-            color: white;
-            margin: 9px 30px 12px;
-            font-family: F1-Bold;
-        }
-        .metamaskButton {
-            display: inline-block;
-            position: absolute;
-            font-family: F1-Bold;
-            margin-top: 10px;
-            height: 50px;
-            right: 10px;
-            font-size: 20px;
-        }
-    }
+.AppHeaderWrapper {
+  width: 100%;
+  height: 71px;
+  background-color: #e10600;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+
+  .f1Logo {
+    display: inline-block;
+    vertical-align: top;
+    width: 130px;
+    margin: 19px 30px 12px;
+  }
+
+  .text {
+    display: inline-block;
+    font-size: 35px;
+    font-weight: bolder;
+    color: white;
+    margin: 9px 30px 12px;
+    font-family: F1-Bold;
+  }
+
+  .metamaskButton {
+    display: inline-block;
+    position: absolute;
+    font-family: F1-Bold;
+    margin-top: 10px;
+    height: 50px;
+    right: 10px;
+    font-size: 20px;
+  }
+}
 
 </style>

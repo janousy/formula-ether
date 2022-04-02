@@ -1,13 +1,16 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import dataModule from '@/store/modules/data'
-/* eslint-disable semi */
+import raceStoreModule from '@/store/modules/raceStore'
+import timerStoreModule from "@/store/modules/timerStore"
+import etherStoreModule from "@/store/modules/etherStore";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
     modules: {
-        data: dataModule
+        raceStore: raceStoreModule,
+        timerStore: timerStoreModule,
+        etherStore: etherStoreModule,
     }
 })
