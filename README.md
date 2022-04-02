@@ -10,8 +10,15 @@
 - Metamask browser extension: https://metamask.io/
 
 ### Ethereum Connection
-This client needs access to the UZHETH blockchain, providing an account with some assets available. It client will connect to this chain and
+This client needs access to the UZHETH blockchain, providing an account with some assets available. The client will connect to this chain and
 interact with the deployed betting contract to place bets and retrieve winners.
+To connect to the UZHETH blockchain the following credentials can be used:
+- Networkname: UZHETH
+- New RPC-URL: http://130.60.244.246:8545
+- Chain ID: 702
+- Currency Symbol: UZHETH
+
+
 
 Alternatively, your can run Ganache locally. The [contarct](https://github.com/janousy/formula-ether/blob/999193c500040612153204c28767041a0845942d/src/contracts/bettingContract.sol) 
 can be deployed with e.g. [Remix IDE](remix.ethereum.org) by adding the local Ganache network to Metamask and the selecting `Injected Web3`
