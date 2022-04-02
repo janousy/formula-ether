@@ -1,82 +1,70 @@
 <template>
-    <div class="raceEnding">
-        <img class="raceLoadGif" :src="getRaceLoadGif" alt="Racing Car racing">
-        <div v-if="raceIsRunning" class="winnersWrapper">
-            <div class="winnerTitle">Winning Team: {{raceWinningTeam}}</div>
-            <Winner
-                class="winners"
-                v-for="(winner, index) in winners"
-                :key="index"
-                :address="winner"
-                :amount="amounts[index]"
-            >
-            </Winner>
-        </div>
+  <div>
+    <div class="winnersWrapper">
+      <div class="winnerTitle">Winning Team: {{ getRaceWinningTeam }}</div>
+      <Winner
+          class="winners"
+          v-for="(winner, index) in getRaceWinners"
+          :key="index"
+          :address="winner"
+          :amount="getWinnersAmounts[index]"
+      />
     </div>
+  </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import Winner from "../atoms/Winner";
-import countDownTimings from "@/consts/countdown.const";
+import Winner from "../atoms/WinnerRow";
+import {mapState} from "vuex";
+import f1MetaData from "../../consts/f1-meta";
 
 export default {
-  name: 'RaceEnding',
-  components: { Winner },
-  props: {},
+  name: "RaceEnding",
+  components: {Winner},
   computed: {
-    ...mapState('data', {
-      raceWinningTeam: (state) => state.raceWinningTeam
+    ...mapState('raceStore', {
+      raceWinningTeam: (state) => state.raceWinningTeam,
+      raceWinningPlayers: (state) => state.raceWinningPlayers,
     }),
-    getRaceLoadGif() {
-        return require('@/assets/images/general/race-load-icon.gif');
-    }
+    getRaceWinningTeam() {
+      const team = f1MetaData.teams.find(team => team.key === this.raceWinningTeam)
+      return team?.displayName;
+    },
+    getRaceWinners() {
+      return this.raceWinningPlayers;
+    },
+    getWinnersAmounts() {
+      // TODO replace with proper values
+      return ['0', '0', '0', '0', '0', '0', '0', '0', '0']
+    },
   },
-  data: () => {
-    return {
-      winners: [],
-      timerCount: countDownTimings.countDownRunTime,
-      amounts: ['1', '2', '3'],
-      ...mapState('data', {
-        raceIsRunning: state => state.raceIsRunning,
-        winners: state => state.winners
-      }),
-    }
-  }
 }
 </script>
 
 <style lang="scss" scoped>
-    @import "src/styles/fonts.scss";
+@import "src/styles/fonts.scss";
 
-    .raceEnding {
-        height: 100%;
-        display: flex;
-        align-items: center;
-        flex-flow: column;
-        .raceLoadGif{
-            width: 800px;
-            margin-top: 50px;
-        }
-        .winnersWrapper {
-            width: 100%;
-            color: white;
-            display: inherit;
-            flex-flow: inherit;
-            align-items: inherit;
-            .winnerTitle {
-                font-family: F1-Bold;
-                font-size: 50px;
-                margin-bottom: 30px;
-            }
-            .winners {
-                font-family: F1-Regular;
-                font-size: 30px;
-                width: 1200px;
-                display: flex;
-                justify-content: space-between;
-            }
-        }
-    }
+.winnersWrapper {
+  width: 100%;
+  margin-top: 200px;
+  color: white;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+
+  .winnerTitle {
+    font-family: F1-Bold;
+    font-size: 50px;
+    margin-bottom: 30px;
+  }
+
+  .winners {
+    font-family: F1-Regular;
+    font-size: 30px;
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+  }
+}
 
 </style>

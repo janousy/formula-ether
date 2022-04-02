@@ -1,8 +1,8 @@
 <template>
-  <b-modal id="HelpModal" size="xl" hide-footer>
+  <b-modal id="AdminModal" centered size="lg">
     <template #modal-header="{ close }">
       <div class="header">
-        <div>How the racing works</div>
+        <div>Admin Selection</div>
         <div class="closeModalWrapper" @click="close()">
           <i class="bi-x closingX"/>
         </div>
@@ -10,22 +10,35 @@
     </template>
     <template #default>
       <div class="mainContent">
-        {{ getHelpText }}
+        <span class="text1">{{ getAdminModalText1 }}</span>
+        <span class="text2">{{ getAdminModalText2 }}</span>
+      </div>
+    </template>
+    <template #modal-footer="{ close }">
+      <div class="footer">
+        <b-button @click="close()">
+          OK
+        </b-button>
       </div>
     </template>
   </b-modal>
 </template>
 
 <script>
-import {helpModalText} from "@/consts/helpModalText.const";
+
+import {texts} from "@/consts/generalTexts.consts";
 
 export default {
-  name: 'HelpModal',
+  name: "AdminModal",
   computed: {
-    getHelpText() {
-      return helpModalText
+    getAdminModalText1() {
+      return texts.adminSelection1
+    },
+    getAdminModalText2() {
+      return texts.adminSelection2
     }
   },
+  methods: {}
 }
 </script>
 
@@ -56,10 +69,23 @@ export default {
 }
 
 .mainContent {
-  font-family: F1-Regular;
   font-size: 20px;
   color: white;
   white-space: pre-line;
+  display: flex;
+  flex-flow: column;
+  .text1 {
+    font-family: F1-Regular;
+  }
+  .text2 {
+    margin-top: 30px;
+    font-family: F1-Bold;
+  }
+}
+
+.footer {
+  font-family: F1-Bold;
+  font-size: 20px;
 }
 
 </style>
