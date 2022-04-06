@@ -33,7 +33,7 @@ export default {
   computed: {
     ...mapState('timerStore', {
       timeElapsed: (state) => state.timeElapsed,
-      timerLessThan30s: (state) => state.timerLessThan30s,
+      preventBetsTimer: (state) => state.preventBetsTimer,
     }),
     ...mapState('raceStore', {
       playersParticipatedInRace: (state) => state.playersParticipatedInRace,
@@ -64,8 +64,8 @@ export default {
         } else {
           this.timerElapsed()
         }
-        if (remainingTime < 30 && !this.timerLessThan30s) {
-          this.$store.commit('timerStore/setTimerLessThan30s', true)
+        if (remainingTime < 30 && !this.preventBetsTimer) {
+          this.$store.commit('timerStore/setPreventBetsTimer', true)
         }
       },
     },
@@ -103,7 +103,7 @@ export default {
       console.log('Reset game');
       this.$emit('resetCounter');
       this.$store.commit('timerStore/setTimeElapsed', false);
-      this.$store.commit('timerStore/setTimerLessThan30s', false);
+      this.$store.commit('timerStore/setPreventBetsTimer', false);
       this.$store.commit('timerStore/setRaceStatus', 0);
       this.$store.commit('raceStore/setBetIsPlaced', false);
       this.$store.commit('raceStore/setRaceWinningTeam', '');

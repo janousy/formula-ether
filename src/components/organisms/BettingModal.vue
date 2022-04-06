@@ -59,7 +59,7 @@ export default {
   },
   computed: {
     ...mapState('timerStore', {
-      timerLessThan30s: (state) => state.timerLessThan30s,
+      preventBetsTimer: (state) => state.preventBetsTimer,
     }),
     ...mapState('etherStore', {
       signer: (state) => state.signer,
@@ -74,7 +74,7 @@ export default {
       return this.betAmount > 0;
     },
     isButtonDisabled() {
-      return this.betAmount <= 0 || this.betAmount === null || this.timerLessThan30s;
+      return this.betAmount <= 0 || this.betAmount === null || this.preventBetsTimer;
     },
   },
   methods: {

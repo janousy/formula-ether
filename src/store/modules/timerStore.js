@@ -2,7 +2,7 @@
 const moduleState = {
     raceStatus: 0,
     timeElapsed: false,
-    timerLessThan30s: false,
+    preventBetsTimer: false,
 };
 
 const getters = {};
@@ -16,8 +16,8 @@ const mutations = {
     setTimeElapsed (state, timeElapsed) {
         state.timeElapsed = timeElapsed;
     },
-    setTimerLessThan30s (state, timerLessThan30s) {
-        state.timerLessThan30s = timerLessThan30s;
+    setPreventBetsTimer (state, preventBetsTimer) {
+        state.preventBetsTimer = preventBetsTimer;
     },
 };
 
