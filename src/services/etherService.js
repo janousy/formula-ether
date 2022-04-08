@@ -90,3 +90,20 @@ export async function getTotalAmount(signer) {
     }
     return 0;
 }
+
+export async function getRaceCounter(signer) {
+    if (!signer) {
+        console.warn('No signer found');
+    }
+    //const bettingAddress = addressesConst.bettingAddress;
+    //const bettingContract = new ethers.Contract(bettingAddress, ABI, signer);
+    console.log('Calling contract for totalBetAmount');
+    try {
+        //return await bettingContract.getAmounts()
+        return 1;
+        // eslint-disable-next-line no-unreachable
+    } catch (err) {
+        console.warn(err);
+    }
+    return 0;
+}

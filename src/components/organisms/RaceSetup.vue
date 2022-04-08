@@ -33,7 +33,7 @@ import f1MetaData from "../../consts/f1-meta";
 import RaceEnding from "../molecules/RaceEnding";
 import {
   distributePrices,
-  getAllPlayers,
+  getAllPlayers, getRaceCounter,
   getTotalAmount,
   getWinningPlayers,
   getWinningTeam
@@ -50,6 +50,7 @@ export default {
     return {
       fillingElements: [0, 1, 2, 3],
       selectedTeam: 'mercedes',
+      initialRaceCounter: 0,
     }
   },
   computed: {
@@ -67,6 +68,7 @@ export default {
       qualifyingResults: (state) => state.qualifyingResults,
       totalAmountPerTeam: (state) => state.totalAmountPerTeam,
       totalBetSum: (state) => state.totalBetSum,
+      raceCounter: (state) => state.raceCounter,
     }),
     getRaceStatus() {
       return this.raceStatus;
@@ -83,10 +85,14 @@ export default {
       if (!newVal) {
         this.simulateQualifyingResults();
       }
-    }
+    },
+    raceCounter() {
+      this.getWinners()
+    },
   },
   beforeMount() {
     this.simulateQualifyingResults();
+    this.getInitialRaceCounter();
     setInterval(() => {
       if (this.getRaceStatus !== 2) {
         console.log('Polled get Total Amounts');
@@ -96,7 +102,7 @@ export default {
     setInterval(() => {
       if (this.getRaceStatus === 2 && this.playersParticipatedInRace) {
         console.log('Poll for Winners');
-        this.getWinners();
+        this.getRaceCounter();
       }
     }, pollingTimes.winners);
   },
@@ -165,6 +171,19 @@ export default {
       if (winningTeam) {
         this.$store.commit('raceStore/setRaceWinningTeam', winningTeam);
 
+      }
+    },
+    async getRaceCounter() {
+      const raceCounter = await getRaceCounter(this.signer);
+      // TODO convert if necessary const parsedInt = parseInt(num._hex, 16);
+      if (raceCounter !== this.initialRaceCounter) {
+        this.$store.commit('raceStore/setRaceCounter', raceCounter);
+      }
+    },
+    async getInitialRaceCounter() {
+      const raceCounter = await getRaceCounter(this.signer);
+      if (raceCounter) {
+        this.initialRaceCounter = raceCounter;
       }
     },
     clickOnTeam(team) {

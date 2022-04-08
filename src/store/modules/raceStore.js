@@ -6,6 +6,7 @@ const moduleState = {
   raceWinningTeam: '',
   totalAmountPerTeam: [],
   totalBetSum: 0,
+  raceCounter: 0,
 };
 
 const getters = {};
@@ -34,8 +35,9 @@ const mutations = {
   setTotalBetSum (state, totalBetSum) {
     state.totalBetSum = totalBetSum;
   },
-
-
+  setRaceCounter (state, raceCount) {
+    state.raceCounter = raceCount;
+  },
 };
 
 export default {

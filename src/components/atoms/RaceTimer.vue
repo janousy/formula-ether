@@ -34,6 +34,8 @@ export default {
     ...mapState('timerStore', {
       timeElapsed: (state) => state.timeElapsed,
       preventBetsTimer: (state) => state.preventBetsTimer,
+      betsProhibitTime: (state) => state.betsProhibitTime,
+
     }),
     ...mapState('raceStore', {
       playersParticipatedInRace: (state) => state.playersParticipatedInRace,
@@ -64,7 +66,7 @@ export default {
         } else {
           this.timerElapsed()
         }
-        if (remainingTime < 30 && !this.preventBetsTimer) {
+        if (remainingTime < this.betsProhibitTime && !this.preventBetsTimer) {
           this.$store.commit('timerStore/setPreventBetsTimer', true)
         }
       },

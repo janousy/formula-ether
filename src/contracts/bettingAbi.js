@@ -1,10 +1,5 @@
 const ABI = [
   {
-    inputs: [],
-    stateMutability: "nonpayable",
-    type: "constructor"
-  },
-  {
     inputs: [
       {
         internalType: "string",
@@ -16,6 +11,32 @@ const ABI = [
     outputs: [],
     stateMutability: "payable",
     type: "function"
+  },
+  {
+    inputs: [],
+    name: "deletePlayerInfo",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "distributePrizes",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "set_winner",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function"
+  },
+  {
+    inputs: [],
+    stateMutability: "nonpayable",
+    type: "constructor"
   },
   {
     inputs: [
@@ -38,9 +59,15 @@ const ABI = [
   },
   {
     inputs: [],
-    name: "distributePrizes",
-    outputs: [],
-    stateMutability: "nonpayable",
+    name: "get_winner",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string"
+      }
+    ],
+    stateMutability: "view",
     type: "function"
   },
   {
@@ -135,19 +162,6 @@ const ABI = [
         internalType: "address payable[20]",
         name: "",
         type: "address[20]"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [],
-    name: "get_winner",
-    outputs: [
-      {
-        internalType: "string",
-        name: "",
-        type: "string"
       }
     ],
     stateMutability: "view",
@@ -252,13 +266,6 @@ const ABI = [
       }
     ],
     stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [],
-    name: "set_winner",
-    outputs: [],
-    stateMutability: "payable",
     type: "function"
   },
   {

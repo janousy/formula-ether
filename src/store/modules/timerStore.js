@@ -3,6 +3,7 @@ const moduleState = {
     raceStatus: 0,
     timeElapsed: false,
     preventBetsTimer: false,
+    betsProhibitTime: 60,
 };
 
 const getters = {};
