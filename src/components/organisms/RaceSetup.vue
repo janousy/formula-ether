@@ -34,7 +34,7 @@ import RaceEnding from "../molecules/RaceEnding";
 import {
   distributePrices,
   getAllPlayers, getRaceCounter,
-  getTotalAmount,
+  getTotalAmount, getWinningAmounts,
   getWinningPlayers,
   getWinningTeam
 } from "@/services/etherService";
@@ -160,30 +160,38 @@ export default {
 
     },
     async getWinners() {
-      // TODO get data of winners amounts somewhere?
       const winningPlayers = await getWinningPlayers(this.signer);
+      const winningAmounts = await getWinningAmounts(this.signer);
       const filteredWinningPlayers = winningPlayers.filter(val => val !== addressesConst.emptyAddress)
+      const filteredWinningAmounts = winningPlayers.filter(val => val !== 0)
       const winningTeam = await getWinningTeam(this.signer);
 
       if (winningPlayers) {
+        console.log(winningPlayers);
         this.$store.commit('raceStore/setRaceWinningPlayers', filteredWinningPlayers);
       }
+      if (winningAmounts) {
+        console.log(winningAmounts)
+        this.$store.commit('raceStore/raceWinningAmounts', filteredWinningAmounts);
+      }
       if (winningTeam) {
+        console.log(winningTeam)
         this.$store.commit('raceStore/setRaceWinningTeam', winningTeam);
-
       }
     },
     async getRaceCounter() {
       const raceCounter = await getRaceCounter(this.signer);
       // TODO convert if necessary const parsedInt = parseInt(num._hex, 16);
       if (raceCounter !== this.initialRaceCounter) {
+        console.log('Race Counter updated to ', raceCounter);
         this.$store.commit('raceStore/setRaceCounter', raceCounter);
       }
     },
     async getInitialRaceCounter() {
-      const raceCounter = await getRaceCounter(this.signer);
-      if (raceCounter) {
-        this.initialRaceCounter = raceCounter;
+      const initRaceCounter = await getRaceCounter(this.signer);
+      if (initRaceCounter) {
+        console.log('Initial Race Counter set to ', initRaceCounter)
+        this.initialRaceCounter = initRaceCounter;
       }
     },
     clickOnTeam(team) {

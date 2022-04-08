@@ -25,6 +25,7 @@ export default {
     ...mapState('raceStore', {
       raceWinningTeam: (state) => state.raceWinningTeam,
       raceWinningPlayers: (state) => state.raceWinningPlayers,
+      raceWinningAmounts: (state) => state.raceWinningAmounts,
     }),
     getRaceWinningTeam() {
       const team = f1MetaData.teams.find(team => team.key === this.raceWinningTeam)
@@ -34,8 +35,7 @@ export default {
       return this.raceWinningPlayers;
     },
     getWinnersAmounts() {
-      // TODO replace with proper values
-      return ['0', '0', '0', '0', '0', '0', '0', '0', '0']
+      return this.getWinnersAmounts;
     },
   },
 }

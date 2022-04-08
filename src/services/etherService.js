@@ -61,6 +61,23 @@ export async function getWinningPlayers(signer) {
         console.warn(ex)
     }
 }
+export async function getWinningAmounts(signer) {
+    if (!signer) {
+        console.warn('No signer found');
+    }
+    const bettingAddress = addressesConst.bettingAddress;
+    // eslint-disable-next-line no-unused-vars
+    const bettingContract = new ethers.Contract(bettingAddress, ABI, signer);
+    console.log('Calling contract to get winning amounts');
+    try {
+        //TODO adjust function name
+        //return await bettingContract.getWinningAmounts()
+        return []
+        // eslint-disable-next-line no-unreachable
+    } catch (ex) {
+        console.warn(ex)
+    }
+}
 
 export async function getWinningTeam(signer) {
     if (!signer) {

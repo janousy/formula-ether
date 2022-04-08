@@ -3,6 +3,7 @@ const moduleState = {
   playersParticipatedInRace: false,
   qualifyingResults: [],
   raceWinningPlayers: [],
+  raceWinningAmounts: [],
   raceWinningTeam: '',
   totalAmountPerTeam: [],
   totalBetSum: 0,
