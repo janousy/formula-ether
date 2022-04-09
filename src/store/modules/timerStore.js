@@ -1,9 +1,11 @@
+import countDownTimings from "@/consts/countdown.const";
+
 // race status: 0 for setting bet, 1 for bet is set and waiting, 2 for winner
 const moduleState = {
     raceStatus: 0,
     timeElapsed: false,
     preventBetsTimer: false,
-    betsProhibitTime: 60,
+    betsProhibitTime: countDownTimings.betsProhibitTiming,
 };
 
 const getters = {};

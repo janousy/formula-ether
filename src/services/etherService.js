@@ -10,7 +10,7 @@ export async function sendBet(ethAmount, team, signer) {
     const bettingContract = new ethers.Contract(bettingAddress, ABI, signer);
     console.log('Calling contract to place bet');
     try {
-        let response = await bettingContract.bet(team.key, {value: ethAmount});
+        let response = await bettingContract.bet(team.key, {value: ethAmount.toString()});
         console.log(response)
         return 1;
     } catch (ex) {
@@ -70,10 +70,7 @@ export async function getWinningAmounts(signer) {
     const bettingContract = new ethers.Contract(bettingAddress, ABI, signer);
     console.log('Calling contract to get winning amounts');
     try {
-        //TODO adjust function name
-        //return await bettingContract.getWinningAmounts()
-        return []
-        // eslint-disable-next-line no-unreachable
+        return await bettingContract.getWinnersGains()
     } catch (ex) {
         console.warn(ex)
     }
@@ -87,7 +84,7 @@ export async function getWinningTeam(signer) {
     const bettingContract = new ethers.Contract(bettingAddress, ABI, signer);
     console.log('Calling contract to get winning Team');
     try {
-        return await bettingContract.get_winner()
+        return await bettingContract.getWinningTeam()
     } catch (ex) {
         console.warn(ex)
     }
@@ -101,7 +98,7 @@ export async function getTotalAmount(signer) {
     const bettingContract = new ethers.Contract(bettingAddress, ABI, signer);
     console.log('Calling contract for totalBetAmount');
     try {
-        return await bettingContract.getAmounts()
+        return await bettingContract.getTotalTeamBets()
     } catch (err) {
         console.warn(err);
     }
@@ -112,15 +109,13 @@ export async function getRaceCounter(signer) {
     if (!signer) {
         console.warn('No signer found');
     }
-    //const bettingAddress = addressesConst.bettingAddress;
-    //const bettingContract = new ethers.Contract(bettingAddress, ABI, signer);
-    console.log('Calling contract for totalBetAmount');
+    const bettingAddress = addressesConst.bettingAddress;
+    const bettingContract = new ethers.Contract(bettingAddress, ABI, signer);
+    console.log('Calling contract for raceCounter');
     try {
-        //return await bettingContract.getAmounts()
-        return 1;
-        // eslint-disable-next-line no-unreachable
+        return await bettingContract.getGamesCounter()
     } catch (err) {
         console.warn(err);
     }
-    return 0;
+    return -1;
 }
