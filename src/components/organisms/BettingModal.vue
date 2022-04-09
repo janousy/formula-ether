@@ -79,7 +79,7 @@ export default {
   },
   methods: {
     async placeBet() {
-      const status = await sendBet(this.betAmount * etherConversions.toMetamask, this.team, this.signer);
+      const status = await sendBet(this.betAmount * etherConversions.weiToEth, this.team, this.signer);
       if (status > 0) {
         this.$store.commit("raceStore/setBetIsPlaced", true);
         this.$store.commit('timerStore/setRaceStatus', 1);

@@ -33,8 +33,10 @@ import f1MetaData from "../../consts/f1-meta";
 import RaceEnding from "../molecules/RaceEnding";
 import {
   distributePrices,
-  getAllPlayers, getRaceCounter,
-  getTotalAmount, getWinningAmounts,
+  getAllPlayers,
+  getRaceCounter,
+  getTotalAmount,
+  getWinningAmounts,
   getWinningPlayers,
   getWinningTeam
 } from "@/services/etherService";
@@ -76,7 +78,8 @@ export default {
   },
   watch: {
     signer() {
-      this.getTotalBetAmount()
+      this.getTotalBetAmount();
+      this.getInitialRaceCounter();
     },
     timeElapsed(newVal) {
       if (newVal) {
@@ -92,7 +95,6 @@ export default {
   },
   beforeMount() {
     this.simulateQualifyingResults();
-    this.getInitialRaceCounter();
     setInterval(() => {
       if (this.getRaceStatus !== 2) {
         console.log('Polled get Total Amounts');
@@ -101,7 +103,7 @@ export default {
     }, pollingTimes.totalAmounts);
     setInterval(() => {
       if (this.getRaceStatus === 2 && this.playersParticipatedInRace) {
-        console.log('Poll for Winners');
+        console.log('Poll for raceCounter');
         this.getRaceCounter();
       }
     }, pollingTimes.winners);
@@ -155,9 +157,6 @@ export default {
           this.$store.commit('timerStore/setRaceStatus', 2);
         }, countDownTimings.waitTimeForNonAdmins)
       }
-
-      await this.getWinners()
-
     },
     async getWinners() {
       const winningPlayers = await getWinningPlayers(this.signer);
@@ -172,7 +171,7 @@ export default {
       }
       if (winningAmounts) {
         console.log(winningAmounts)
-        this.$store.commit('raceStore/raceWinningAmounts', filteredWinningAmounts);
+        this.$store.commit('raceStore/setRaceWinningAmounts', filteredWinningAmounts);
       }
       if (winningTeam) {
         console.log(winningTeam)
@@ -181,17 +180,22 @@ export default {
     },
     async getRaceCounter() {
       const raceCounter = await getRaceCounter(this.signer);
-      // TODO convert if necessary const parsedInt = parseInt(num._hex, 16);
-      if (raceCounter !== this.initialRaceCounter) {
-        console.log('Race Counter updated to ', raceCounter);
-        this.$store.commit('raceStore/setRaceCounter', raceCounter);
+      const parsedRaceCounter = parseInt(raceCounter._hex, 16);
+      if (parsedRaceCounter !== this.initialRaceCounter) {
+        console.log('Race Counter updated to ', parsedRaceCounter);
+        this.$store.commit('raceStore/setRaceCounter', parsedRaceCounter);
+        this.initialRaceCounter = parsedRaceCounter;
       }
     },
     async getInitialRaceCounter() {
       const initRaceCounter = await getRaceCounter(this.signer);
-      if (initRaceCounter) {
-        console.log('Initial Race Counter set to ', initRaceCounter)
-        this.initialRaceCounter = initRaceCounter;
+      const parsedRaceCounter = parseInt(initRaceCounter._hex, 16);
+      if (parsedRaceCounter >= 0) {
+        console.log('Initial Race Counter set to ', parsedRaceCounter)
+        this.initialRaceCounter = parsedRaceCounter;
+      }
+      else {
+        console.warn('No initial race counter is set');
       }
     },
     clickOnTeam(team) {

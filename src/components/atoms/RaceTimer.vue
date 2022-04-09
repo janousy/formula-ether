@@ -7,11 +7,11 @@
     </div>
     <div class="clockWrapper">
       <div>
-        <p class="time" :class="timerLessThan1Min ? 'colorRed' : ''">{{ getMinutes }}</p>
+        <p class="time" :class="timerLessThanProhibitBetsTime ? 'colorRed' : ''">{{ getMinutes }}</p>
         <span class="unit">mins</span>
       </div>
       <div>
-        <p class="time" :class="timerLessThan1Min ? 'colorRed' : ''">{{ getSeconds }}</p>
+        <p class="time" :class="timerLessThanProhibitBetsTime ? 'colorRed' : ''">{{ getSeconds }}</p>
         <span class="unit">sec</span>
       </div>
     </div>
@@ -35,7 +35,6 @@ export default {
       timeElapsed: (state) => state.timeElapsed,
       preventBetsTimer: (state) => state.preventBetsTimer,
       betsProhibitTime: (state) => state.betsProhibitTime,
-
     }),
     ...mapState('raceStore', {
       playersParticipatedInRace: (state) => state.playersParticipatedInRace,
@@ -49,8 +48,8 @@ export default {
     getMinutes() {
       return Math.floor(this.timerCount / 60);
     },
-    timerLessThan1Min() {
-      return this.timerCount < 60;
+    timerLessThanProhibitBetsTime() {
+      return this.timerCount < countDownTimings.betsProhibitTiming;
     },
   },
   watch: {

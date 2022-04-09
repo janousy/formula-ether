@@ -28,7 +28,28 @@ const ABI = [
   },
   {
     inputs: [],
-    name: "set_winner",
+    name: "initializeTotalTeamBets",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "resetGame",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "setWinnerPlayers",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "setWinningTeam",
     outputs: [],
     stateMutability: "payable",
     type: "function"
@@ -59,12 +80,12 @@ const ABI = [
   },
   {
     inputs: [],
-    name: "get_winner",
+    name: "gamesCounter",
     outputs: [
       {
-        internalType: "string",
+        internalType: "uint256",
         name: "",
-        type: "string"
+        type: "uint256"
       }
     ],
     stateMutability: "view",
@@ -85,25 +106,12 @@ const ABI = [
   },
   {
     inputs: [],
-    name: "getAmounts",
+    name: "getGamesCounter",
     outputs: [
       {
-        internalType: "uint256[]",
+        internalType: "uint256",
         name: "",
-        type: "uint256[]"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [],
-    name: "getAmounts2",
-    outputs: [
-      {
-        internalType: "uint256[10]",
-        name: "",
-        type: "uint256[10]"
+        type: "uint256"
       }
     ],
     stateMutability: "view",
@@ -156,12 +164,25 @@ const ABI = [
   },
   {
     inputs: [],
+    name: "getTotalTeamBets",
+    outputs: [
+      {
+        internalType: "uint256[]",
+        name: "",
+        type: "uint256[]"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
     name: "getWinnerPlayers",
     outputs: [
       {
-        internalType: "address payable[20]",
+        internalType: "address payable[]",
         name: "",
-        type: "address[20]"
+        type: "address[]"
       }
     ],
     stateMutability: "view",
@@ -169,12 +190,12 @@ const ABI = [
   },
   {
     inputs: [],
-    name: "maxAmountOfBets",
+    name: "getWinnersGains",
     outputs: [
       {
-        internalType: "uint256",
+        internalType: "uint256[]",
         name: "",
-        type: "uint256"
+        type: "uint256[]"
       }
     ],
     stateMutability: "view",
@@ -182,25 +203,12 @@ const ABI = [
   },
   {
     inputs: [],
-    name: "minimumBet",
+    name: "getWinningTeam",
     outputs: [
       {
-        internalType: "uint256",
+        internalType: "string",
         name: "",
-        type: "uint256"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [],
-    name: "numberOfBets",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
+        type: "string"
       }
     ],
     stateMutability: "view",
@@ -307,13 +315,19 @@ const ABI = [
     type: "function"
   },
   {
-    inputs: [],
-    name: "teamWinner",
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    name: "totalTeamBets",
     outputs: [
       {
-        internalType: "string",
+        internalType: "uint256",
         name: "",
-        type: "string"
+        type: "uint256"
       }
     ],
     stateMutability: "view",
@@ -327,12 +341,44 @@ const ABI = [
         type: "uint256"
       }
     ],
-    name: "totalBets",
+    name: "winnerPlayers",
+    outputs: [
+      {
+        internalType: "address payable",
+        name: "",
+        type: "address"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    name: "winnersGains",
     outputs: [
       {
         internalType: "uint256",
         name: "",
         type: "uint256"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "winningTeam",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string"
       }
     ],
     stateMutability: "view",
