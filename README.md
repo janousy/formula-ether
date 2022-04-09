@@ -18,7 +18,7 @@ To connect to the UZHETH blockchain the following credentials can be used:
 - Chain ID: 702
 - Currency Symbol: UZHETH
 
-
+More information about the UZHEthereum chain can be found [here](http://130.60.24.79:1234/?network=UZHETH)
 
 Alternatively, your can run Ganache locally. The [contract](https://github.com/janousy/formula-ether/blob/999193c500040612153204c28767041a0845942d/src/contracts/bettingContract.sol) 
 can be deployed with e.g. [Remix IDE](remix.ethereum.org) by adding the local Ganache network to Metamask and the selecting `Injected Web3`
