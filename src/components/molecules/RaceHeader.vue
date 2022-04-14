@@ -1,6 +1,6 @@
 <template>
   <div class="raceHeader">
-    <div class="trackInfoWrapper">
+    <div v-if="internalRaceCounter !== -1" class="trackInfoWrapper">
       <div class="trackImageWrapper">
         <img class="trackImage" :src="getRaceImage" alt="Track Image">
       </div>
@@ -8,7 +8,11 @@
         <span>{{ getRaceName }}</span>
         <span>Total Bets: {{ getTotalBetAmount }} Ether</span>
       </div>
-
+    </div>
+    <div v-else class="trackInfoWrapper">
+      <div class="textWrapper">
+        <span>{{ getLoadingText }}</span>
+      </div>
     </div>
     <Timer class="timer" @resetCounter="updateRaceLocation()"/>
   </div>
@@ -19,6 +23,7 @@ import raceLocations from "../../consts/raceLocations.const";
 import Timer from "../atoms/RaceTimer";
 import {mapState} from "vuex";
 import {etherConversions} from "@/consts/etherConversions.const";
+import {texts} from "@/consts/generalTexts.consts";
 
 export default {
   name: 'RaceHeader',
@@ -28,14 +33,14 @@ export default {
       type: Number,
       required: true,
     },
-    raceCounter2: {
+    contractRaceCounter: {
       type: Number,
       required: true,
     }
   },
   data: () => {
     return {
-      raceCounter: 0,
+      internalRaceCounter: -1,
     }
   },
   computed: {
@@ -43,19 +48,25 @@ export default {
       signer: (state) => state.signer,
     }),
     getRaceImage() {
-      return require(`@/assets/images/raceTracks/${raceLocations.locations[this.raceCounter]}.png`);
+      return require(`@/assets/images/raceTracks/${raceLocations.locations[this.internalRaceCounter]}.png`);
     },
     getRaceName() {
-      return raceLocations.raceName[this.raceCounter];
+      return raceLocations.raceName[this.internalRaceCounter];
     },
     getTotalBetAmount() {
       return this.totalBetSum / etherConversions.weiToEth;
+    },
+    getLoadingText() {
+      return texts.trackLoading;
     }
   },
   methods: {
     updateRaceLocation() {
       console.log('race location is updated');
-      this.raceCounter = (this.raceCounter + 1) % raceLocations.raceName.length;
+      this.internalRaceCounter = (this.contractRaceCounter) % raceLocations.raceName.length;
+    },
+    setInitialRaceCounter(parsedRaceCounter) {
+      this.internalRaceCounter = parsedRaceCounter;
     },
   }
 }
@@ -71,22 +82,18 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   .trackInfoWrapper {
     padding-top: 15px;
     padding-left: 15px;
     display: flex;
     align-items: center;
-
     .trackImageWrapper {
       width: 120px;
       margin-right: 20px;
-
       .trackImage {
         width: 120px;
       }
     }
-
     .textWrapper {
       padding-left: 10px;
       display: flex;
@@ -95,13 +102,10 @@ export default {
       color: white;
       font-size: 30px;
     }
-
   }
-
   .timer {
     margin-right: 40px;
   }
-
 }
 
 </style>

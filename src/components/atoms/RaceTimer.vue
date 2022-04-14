@@ -109,6 +109,7 @@ export default {
       this.$store.commit('raceStore/setBetIsPlaced', false);
       this.$store.commit('raceStore/setRaceWinningTeam', '');
       this.$store.commit('raceStore/setRaceWinningPlayers', []);
+      this.$store.commit('raceStore/setRaceWinningAmounts', []);
       this.$store.commit('raceStore/setTotalAmountPerTeam', []);
       this.$store.commit('raceStore/setTotalBetSum', 0);
       this.$store.commit('raceStore/setQualifyingResults', []);

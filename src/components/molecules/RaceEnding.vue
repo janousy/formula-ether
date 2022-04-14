@@ -29,13 +29,13 @@ export default {
     }),
     getRaceWinningTeam() {
       const team = f1MetaData.teams.find(team => team.key === this.raceWinningTeam)
-      return team?.displayName;
+      return team?.displayName ? team.displayName : '';
     },
     getRaceWinners() {
       return this.raceWinningPlayers;
     },
     getWinnersAmounts() {
-      return this.getWinnersAmounts;
+      return this.raceWinningAmounts;
     },
   },
 }

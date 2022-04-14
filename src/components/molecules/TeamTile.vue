@@ -2,7 +2,7 @@
   <div class="teamTile">
     <div class="textWrapper">
       <div class="teamName">{{ team.displayName }}</div>
-      <div class="quote">Payout = {{ getQuote }}</div>
+      <div class="quote">Factor = {{ getQuote }}</div>
       <div class="quote">Qualifying = {{ getQualifyingPosition }}</div>
     </div>
     <div class="imageWrapper">
@@ -12,6 +12,9 @@
 </template>
 
 <script>
+
+import f1MetaData from "@/consts/f1-meta";
+
 export default {
   name: 'TeamTile',
   props: {
@@ -19,7 +22,7 @@ export default {
       type: Object,
       required: true
     },
-    totalAmounts: {
+    totalAmountPerTeam: {
       type: Array,
       required: true,
     },
@@ -40,7 +43,8 @@ export default {
       if (this.totalBetSum === 0) {
         return 0;
       }
-      return (1 + this.totalAmounts[this.indexNumber] / this.totalBetSum).toFixed(2);
+      const index = f1MetaData.teams.indexOf(this.team);
+      return (this.totalAmountPerTeam[index] / this.totalBetSum).toFixed(2);
     },
     getQualifyingPosition() {
       let textAdding = '';

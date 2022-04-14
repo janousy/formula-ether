@@ -3,4 +3,5 @@ export const texts = {
     noParticipationText: 'No players participated in this race',
     adminSelection1: 'You were selected as admin.',
     adminSelection2: 'Please confirm the race start in metamask.',
+    trackLoading: 'Loading...',
 };
