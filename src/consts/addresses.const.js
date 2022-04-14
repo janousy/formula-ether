@@ -1,5 +1,5 @@
 const addressesConst = {
-  bettingAddress: '0x43c23e39d14E1154D381aBb663bD1E0f0fF88cd2',
+  bettingAddress: '0x5edCA8a5203E9f8E511AB1A31fb7C4a171c3A3Db',
   emptyAddress: '0x0000000000000000000000000000000000000000',
 };
 

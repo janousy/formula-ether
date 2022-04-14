@@ -1,6 +1,6 @@
 <template>
   <div>
-    <RaceHeader :total-bet-sum="totalBetSum"/>
+    <RaceHeader :total-bet-sum="totalBetSum" :race-counter2="initialRaceCounter"/>
     <div v-show="getRaceStatus === 0" class="teamsWrapper">
       <TeamTile
           v-for="(team, index) in qualifyingResults"

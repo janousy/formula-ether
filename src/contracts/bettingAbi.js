@@ -160,9 +160,9 @@ const ABI = [
     name: "getTotalTeamBets",
     outputs: [
       {
-        internalType: "uint256[10]",
+        internalType: "uint256[]",
         name: "",
-        type: "uint256[10]"
+        type: "uint256[]"
       }
     ],
     stateMutability: "view",
@@ -173,9 +173,9 @@ const ABI = [
     name: "getWinnerPlayers",
     outputs: [
       {
-        internalType: "address payable[5]",
+        internalType: "address payable[]",
         name: "",
-        type: "address[5]"
+        type: "address[]"
       }
     ],
     stateMutability: "view",
@@ -186,9 +186,9 @@ const ABI = [
     name: "getWinnersGains",
     outputs: [
       {
-        internalType: "uint256[5]",
+        internalType: "uint256[]",
         name: "",
-        type: "uint256[5]"
+        type: "uint256[]"
       }
     ],
     stateMutability: "view",

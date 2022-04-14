@@ -27,6 +27,10 @@ export default {
     totalBetSum: {
       type: Number,
       required: true,
+    },
+    raceCounter2: {
+      type: Number,
+      required: true,
     }
   },
   data: () => {
