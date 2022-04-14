@@ -1,12 +1,12 @@
 <template>
   <div>
-    <RaceHeader :total-bet-sum="totalBetSum"/>
+    <RaceHeader ref="raceHeader" :total-bet-sum="totalBetSum" :contract-race-counter="initialRaceCounter"/>
     <div v-show="getRaceStatus === 0" class="teamsWrapper">
       <TeamTile
           v-for="(team, index) in qualifyingResults"
           :key="`team${index}`"
           :team="getTeam(team)"
-          :total-amounts="totalAmountPerTeam"
+          :total-amount-per-team="totalAmountPerTeam"
           :total-bet-sum="totalBetSum"
           :index-number="index"
           @click.native="clickOnTeam(team)"
@@ -160,19 +160,26 @@ export default {
     },
     async getWinners() {
       const winningPlayers = await getWinningPlayers(this.signer);
-      const winningAmounts = await getWinningAmounts(this.signer);
-      const filteredWinningPlayers = winningPlayers.filter(val => val !== addressesConst.emptyAddress)
-      const filteredWinningAmounts = winningPlayers.filter(val => val !== 0)
+      const winningAmountsInHex = await getWinningAmounts(this.signer);
       const winningTeam = await getWinningTeam(this.signer);
 
       if (winningPlayers) {
         console.log(winningPlayers);
+        const filteredWinningPlayers = winningPlayers.filter(val => val !== addressesConst.emptyAddress)
         this.$store.commit('raceStore/setRaceWinningPlayers', filteredWinningPlayers);
       }
-      if (winningAmounts) {
+
+      if (winningAmountsInHex) {
+        const winningAmounts = [];
+        winningAmountsInHex.forEach((num) => {
+          const parsedInt = parseInt(num._hex, 16);
+          winningAmounts.push(parsedInt);
+        })
         console.log(winningAmounts)
+        const filteredWinningAmounts = winningAmounts.filter(val => val !== 0)
         this.$store.commit('raceStore/setRaceWinningAmounts', filteredWinningAmounts);
       }
+
       if (winningTeam) {
         console.log(winningTeam)
         this.$store.commit('raceStore/setRaceWinningTeam', winningTeam);
@@ -193,6 +200,7 @@ export default {
       if (parsedRaceCounter >= 0) {
         console.log('Initial Race Counter set to ', parsedRaceCounter)
         this.initialRaceCounter = parsedRaceCounter;
+        this.$refs.raceHeader.setInitialRaceCounter(parsedRaceCounter);
       }
       else {
         console.warn('No initial race counter is set');

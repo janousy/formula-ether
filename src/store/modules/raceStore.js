@@ -28,7 +28,7 @@ const mutations = {
     state.raceWinningTeam = raceWinningTeam;
   },
   setRaceWinningPlayers (state, raceWinningPlayers) {
-    state.setRaceWinningPlayers = raceWinningPlayers;
+    state.raceWinningPlayers = raceWinningPlayers;
   },
   setRaceWinningAmounts (state, raceWinningAmounts) {
     state.raceWinningAmounts = raceWinningAmounts
