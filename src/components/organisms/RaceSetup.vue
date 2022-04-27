@@ -44,6 +44,7 @@ import {pollingTimes} from "@/consts/pollingTimes.const";
 import {qualifyingSetup} from "@/consts/qualifyingSetup.const";
 import countDownTimings from "@/consts/countdown.const";
 import addressesConst from "@/consts/addresses.const";
+import {etherConversions} from "@/consts/etherConversions.const";
 
 export default {
   name: 'RaceSetup',
@@ -172,7 +173,8 @@ export default {
       if (winningAmountsInHex) {
         const winningAmounts = [];
         winningAmountsInHex.forEach((num) => {
-          const parsedInt = parseInt(num._hex, 16);
+          let parsedInt = parseInt(num._hex, 16);
+          parsedInt = parsedInt / etherConversions.weiToEth
           winningAmounts.push(parsedInt);
         })
         console.log(winningAmounts)
