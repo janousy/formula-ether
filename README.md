@@ -10,7 +10,9 @@
 - Metamask browser extension: https://metamask.io/
 
 ### Ethereum Connection
-This client needs access to the UZHETH blockchain, providing an account with some assets available. The client will connect to this chain and
+This client needs access to the UZHETH blockchain, providing an account with some assets available. 
+Therefore, the user needs to be within the UZH network, or establish a VPN connection.
+The client will connect to this chain and
 interact with the deployed betting contract to place bets and retrieve winners.
 To connect to the UZHETH blockchain the following credentials can be used:
 - Networkname: UZHETH
