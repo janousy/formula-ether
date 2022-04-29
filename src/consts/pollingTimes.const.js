@@ -1,4 +1,4 @@
 export const pollingTimes = {
-    totalAmounts: 0.2 * 60 * 1000, // 20seconds
-    winners: 0.1 * 60 * 1000, // 10 seconds
+    totalAmounts: 0.05 * 60 * 1000, // 5 seconds
+    winners: 0.05 * 60 * 1000, // 5 seconds
 };
