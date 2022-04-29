@@ -1,21 +1,19 @@
-//V9
-pragma solidity >0.6.4;
+//V11
+pragma solidity >=0.7.0 <0.7.1;
 pragma experimental ABIEncoderV2;
 //compiler 0.7.0
 //SPDX-License-Identifier:MIT
 
 contract Betting{
-    //uint256 public minimumBet;//later
-    uint256[] public totalTeamBets;//number of TeamBets=number of teams
-    //uint256 public maxAmountOfBets = 1000;
+    uint256[10] public totalTeamBets;//number of TeamBets=number of teams
     uint public gamesCounter = 0;//Counts every game, increases when distributePrizes is called.
 
     address payable[] public players;
-    address payable[] public winnerPlayers;//Stores the winner players in each game.
+    address payable[5] public winnerPlayers;//Stores the winner players in each game.
 
     string[] public teamNamesFix;
     string[] public teamNamesQuotes;
-    uint256[] public winnersGains;//Holds a list of the gains of the winner players
+    uint256[5] public winnersGains;//Holds a list of the gains of the winner players
     string public winningTeam;
 
     struct Player {
@@ -26,30 +24,15 @@ contract Betting{
     // Address of the player and => the user info
     mapping(address => Player) public playerInfo;
 
-    constructor() public {
-        //minimumBet = 100000000000000;
-
+    constructor() {
         //TeamNamesQuotes array is used only to provide different possibilities for each team
         //and determine the winner team in the "setWinnerTeam" function with the random calculation using this array.
-        teamNamesQuotes = ["alfa_romeo", "alfa_romeo", "alfa_romeo", "alpha_tauri", "alpine", "aston_martin", "ferrari",
-        "haas","mclaren", "mercedes","redbull", "redbull", "redbull", "redbull","williams"];
+        teamNamesQuotes = ["alfa_romeo", "alfa_romeo", "alpha_tauri", "alpha_tauri", "alpine", "alpine", "aston_martin", "ferrari", "ferrari", "ferrari",
+        "haas", "haas", "mclaren", "mercedes", "mercedes", "mercedes","redbull", "redbull", "redbull","williams"];
 
         teamNamesFix = ["alfa_romeo", "alpha_tauri", "alpine", "aston_martin", "ferrari",
         "haas","mclaren", "mercedes","redbull","williams"];
 
-        //teamNamesQuotes = ["mercedes", "mercedes", "mercedes", "mercedes", "mercedes", "mercedes", "mercedes",
-        //                   "mercedes","mercedes", "mercedes","mercedes", "mercedes", "mercedes", "mercedes","mercedes"];
-        //teamNamesFix = ["mercedes", "mercedes", "mercedes", "mercedes", "mercedes",
-        //                "mercedes","mercedes", "mercedes","mercedes","mercedes"];
-
-        //Sets the values and the size of the "totalTeamBets" dynamic array according to "teamNamesFix" array.
-        initializeTotalTeamBets();
-    }
-
-    function initializeTotalTeamBets() public payable {
-        for(uint i = 0; i < teamNamesFix.length; i++){
-            totalTeamBets.push(0);
-        }
     }
 
     //For example, if you put in 10, it will generate a random number between 0-9 https://blog.finxter.com/how-to-generate-random-numbers-in-solidity/
@@ -88,10 +71,6 @@ contract Betting{
 
     //This function includes the player to the game if he hasn't played and his bet is higher than the min. bet.
     function bet(string memory _teamSelected) public payable {
-        //If this is the first bet and there are no players yet, reset the totalTeamBets array for this new game:
-        /*if (players.length==0){
-            delete totalTeamBets;
-        }*/
 
         //The first require is used to check if the player already exist
         require(!checkPlayerExists(msg.sender));
@@ -127,8 +106,8 @@ contract Betting{
             playerAddress = players[i];
             //If the player selected the winner team
             //We add his address to the winnerPlayers array
-            if(keccak256(abi.encodePacked(playerInfo[playerAddress].teamSelected)) == keccak256(abi.encodePacked(getWinningTeam()))){
-                winnerPlayers.push(playerAddress);
+            if(keccak256(abi.encodePacked(playerInfo[playerAddress].teamSelected)) == keccak256(abi.encodePacked(winningTeam))){
+                winnerPlayers[i]=playerAddress;
             }
         }
     }
@@ -136,11 +115,10 @@ contract Betting{
     function resetGame() public payable {
         deletePlayerInfo(); //Delete player info at all addresses
         delete players; //Delete all the players array
-        delete winnerPlayers; //Delete all winning players
         delete totalTeamBets; //Delete all the bets of the players
     }
 
-    function distributePrizes() public {
+    function distributePrizes() public payable {
         uint256 betOnWinnerTeam = 0; //winning pool
         uint256 totalBetsOnLoserTeams = 0; //loosing pool
         address add;
@@ -155,50 +133,53 @@ contract Betting{
 
         //We define the BetOnWinnerTeam. Then, we calculate totalBetsOnLoserTeams by summing the rest
         for(uint i=0; i<teamNamesFix.length; i++){
-            if (keccak256(abi.encodePacked(teamNamesFix[i])) == keccak256(abi.encodePacked(getWinningTeam()))){
+            if (keccak256(abi.encodePacked(teamNamesFix[i])) == keccak256(abi.encodePacked(winningTeam))){
                 betOnWinnerTeam = totalTeamBets[i];
             }else{
                 totalBetsOnLoserTeams += totalTeamBets[i];
             }
         }
+        /*
+        //This is only for testing if there is a winner, this contract works:
+        //The code below is only when "mercedes" is used in all teamNamesQuotes values:
+        if (keccak256(abi.encodePacked(teamNamesQuotes[0]))==keccak256(abi.encodePacked("mercedes"))){
+            totalBetsOnLoserTeams =50;
+        }
+        */
 
         //Delete all the gains of the winnerPlayers from the previous game before setting it in the for loop below:
         delete winnersGains;
 
-        //We loop through the array of winnerPlayers, to give ethers to the winnerPlayers
-        for(uint j = 0; j < winnerPlayers.length; j++){
-            // Check that the address in this fixed array is not empty
-            if(winnerPlayers[j] != address(0))
-                add = winnerPlayers[j];
-            bet_amount = playerInfo[add].amountBet;
-            winnersGains.push(bet_amount+(bet_amount*totalBetsOnLoserTeams/betOnWinnerTeam));
-            //Transfer the money to the user, Formula has to be adjusted
-            winnerPlayers[j].transfer(bet_amount+(bet_amount*totalBetsOnLoserTeams/betOnWinnerTeam));
+        //Check if at least one player wins. If not, don't make a calculation for each player
+        //and don't assign any values to winnerGains array
+        //don't transfer any prize to the players.
+        if(betOnWinnerTeam!=0){
+            //We loop through the array of winnerPlayers, to give ethers to the winnerPlayers
+            for(uint j = 0; j < winnerPlayers.length; j++){
+                // Check that the address in this fixed array is not empty
+                if(winnerPlayers[j] != address(0)){
+                    add = winnerPlayers[j];
+                    bet_amount = playerInfo[add].amountBet;
+                    winnersGains[j] = bet_amount+(bet_amount*totalBetsOnLoserTeams/betOnWinnerTeam);
+                    // Transfer the money to the user, Formula has to be adjusted
+                    winnerPlayers[j].transfer(winnersGains[j]);
+                }
+            }
         }
-        //resetGame();//Empties all the arrays to be used again for the next game.
-
-        deletePlayerInfo(); //Delete player info at all addresses
-        delete players; //Delete all the players array
-        delete totalTeamBets; //Delete all the bets of the players
+        resetGame();//Empties the arrays to be used again for the next game.
     }
 
     //returns the total bets on each team:
-    function getTotalTeamBets() public view returns(uint256[] memory){
-        uint256[] memory totalAmounts= new uint256[](totalTeamBets.length);
-        for (uint i=0; i<totalTeamBets.length; i++){
-            totalAmounts[i] = totalTeamBets[i];
-        }
-        return totalAmounts;
-    }
+    function getTotalTeamBets() public view returns (uint256[10] memory){ return totalTeamBets; }
 
     //returns all players
     function getPlayers() public view returns (address payable[] memory) { return players; }
 
     //returns all winning players
-    function getWinnerPlayers() public view returns (address payable[] memory) { return winnerPlayers; }
+    function getWinnerPlayers() public view returns (address payable[5] memory) { return winnerPlayers; }
 
     //returns the gains of each winner
-    function getWinnersGains() public view returns(uint256[] memory){ return winnersGains; }
+    function getWinnersGains() public view returns(uint256[5] memory) { return winnersGains; }
 
     //returns the team name in the list on index position
     function getTeamName(uint256 index) public view returns (string memory) { return teamNamesFix[index];}
