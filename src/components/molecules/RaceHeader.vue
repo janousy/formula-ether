@@ -62,11 +62,12 @@ export default {
   },
   methods: {
     updateRaceLocation() {
-      console.log('race location is updated');
+      console.log('Race location is updated');
       this.internalRaceCounter = (this.contractRaceCounter) % raceLocations.raceName.length;
     },
     setInitialRaceCounter(parsedRaceCounter) {
-      this.internalRaceCounter = parsedRaceCounter;
+      console.log("Set internal app header race counter to:", parsedRaceCounter % raceLocations.raceName.length);
+      this.internalRaceCounter = parsedRaceCounter % raceLocations.raceName.length;
     },
   }
 }
