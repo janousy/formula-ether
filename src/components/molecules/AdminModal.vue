@@ -2,7 +2,7 @@
   <b-modal id="AdminModal" centered size="lg">
     <template #modal-header="{ close }">
       <div class="header">
-        <div>Admin Selection</div>
+        <div>Race Director Selection</div>
         <div class="closeModalWrapper" @click="close()">
           <i class="bi-x closingX"/>
         </div>
