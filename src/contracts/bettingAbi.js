@@ -1,381 +1,381 @@
 const ABI = [
   {
-    inputs: [
+    "inputs": [],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [
       {
-        internalType: "string",
-        name: "_teamSelected",
-        type: "string"
+        "internalType": "string",
+        "name": "_teamSelected",
+        "type": "string"
       }
     ],
-    name: "bet",
-    outputs: [],
-    stateMutability: "payable",
-    type: "function"
+    "name": "bet",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "deletePlayerInfo",
-    outputs: [],
-    stateMutability: "payable",
-    type: "function"
-  },
-  {
-    inputs: [],
-    name: "distributePrizes",
-    outputs: [],
-    stateMutability: "payable",
-    type: "function"
-  },
-  {
-    inputs: [],
-    name: "resetGame",
-    outputs: [],
-    stateMutability: "payable",
-    type: "function"
-  },
-  {
-    inputs: [],
-    name: "setWinnerPlayers",
-    outputs: [],
-    stateMutability: "payable",
-    type: "function"
-  },
-  {
-    inputs: [],
-    name: "setWinningTeam",
-    outputs: [],
-    stateMutability: "payable",
-    type: "function"
-  },
-  {
-    inputs: [],
-    stateMutability: "nonpayable",
-    type: "constructor"
-  },
-  {
-    inputs: [
+    "inputs": [
       {
-        internalType: "address",
-        name: "player",
-        type: "address"
+        "internalType": "address",
+        "name": "player",
+        "type": "address"
       }
     ],
-    name: "checkPlayerExists",
-    outputs: [
+    "name": "checkPlayerExists",
+    "outputs": [
       {
-        internalType: "bool",
-        name: "",
-        type: "bool"
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
       }
     ],
-    stateMutability: "view",
-    type: "function"
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "gamesCounter",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
+    "inputs": [],
+    "name": "deletePlayerInfo",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "getAllTeamNames",
-    outputs: [
-      {
-        internalType: "string[]",
-        name: "",
-        type: "string[]"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
+    "inputs": [],
+    "name": "distributePrizes",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "getGamesCounter",
-    outputs: [
+    "inputs": [],
+    "name": "gamesCounter",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
-    stateMutability: "view",
-    type: "function"
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "getPlayers",
-    outputs: [
+    "inputs": [],
+    "name": "getAllTeamNames",
+    "outputs": [
       {
-        internalType: "address payable[]",
-        name: "",
-        type: "address[]"
+        "internalType": "string[]",
+        "name": "",
+        "type": "string[]"
       }
     ],
-    stateMutability: "view",
-    type: "function"
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "getQuotes",
-    outputs: [
+    "inputs": [],
+    "name": "getGamesCounter",
+    "outputs": [
       {
-        internalType: "string[]",
-        name: "",
-        type: "string[]"
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
-    stateMutability: "view",
-    type: "function"
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [],
+    "name": "getPlayers",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "index",
-        type: "uint256"
+        "internalType": "address payable[]",
+        "name": "",
+        "type": "address[]"
       }
     ],
-    name: "getTeamName",
-    outputs: [
-      {
-        internalType: "string",
-        name: "",
-        type: "string"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "getTotalTeamBets",
-    outputs: [
+    "inputs": [],
+    "name": "getQuotes",
+    "outputs": [
       {
-        internalType: "uint256[10]",
-        name: "",
-        type: "uint256[10]"
+        "internalType": "string[]",
+        "name": "",
+        "type": "string[]"
       }
     ],
-    stateMutability: "view",
-    type: "function"
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "getWinnerPlayers",
-    outputs: [
+    "inputs": [
       {
-        internalType: "address payable[5]",
-        name: "",
-        type: "address[5]"
+        "internalType": "uint256",
+        "name": "index",
+        "type": "uint256"
       }
     ],
-    stateMutability: "view",
-    type: "function"
+    "name": "getTeamName",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "getWinnersGains",
-    outputs: [
+    "inputs": [],
+    "name": "getTotalTeamBets",
+    "outputs": [
       {
-        internalType: "uint256[5]",
-        name: "",
-        type: "uint256[5]"
+        "internalType": "uint256[10]",
+        "name": "",
+        "type": "uint256[10]"
       }
     ],
-    stateMutability: "view",
-    type: "function"
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "getWinningTeam",
-    outputs: [
+    "inputs": [],
+    "name": "getWinnerPlayers",
+    "outputs": [
       {
-        internalType: "string",
-        name: "",
-        type: "string"
+        "internalType": "address payable[5]",
+        "name": "",
+        "type": "address[5]"
       }
     ],
-    stateMutability: "view",
-    type: "function"
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [],
+    "name": "getWinnersGains",
+    "outputs": [
       {
-        internalType: "address",
-        name: "",
-        type: "address"
+        "internalType": "uint256[5]",
+        "name": "",
+        "type": "uint256[5]"
       }
     ],
-    name: "playerInfo",
-    outputs: [
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getWinningTeam",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "amountBet",
-        type: "uint256"
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "playerInfo",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "amountBet",
+        "type": "uint256"
       },
       {
-        internalType: "string",
-        name: "teamSelected",
-        type: "string"
+        "internalType": "string",
+        "name": "teamSelected",
+        "type": "string"
       }
     ],
-    stateMutability: "view",
-    type: "function"
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
-    name: "players",
-    outputs: [
+    "name": "players",
+    "outputs": [
       {
-        internalType: "address payable",
-        name: "",
-        type: "address"
+        "internalType": "address payable",
+        "name": "",
+        "type": "address"
       }
     ],
-    stateMutability: "view",
-    type: "function"
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "number",
-        type: "uint256"
+        "internalType": "uint256",
+        "name": "number",
+        "type": "uint256"
       }
     ],
-    name: "random",
-    outputs: [
+    "name": "random",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
-    stateMutability: "view",
-    type: "function"
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
-    ],
-    name: "teamNamesFix",
-    outputs: [
-      {
-        internalType: "string",
-        name: "",
-        type: "string"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
+    "inputs": [],
+    "name": "resetGame",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
   },
   {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
-    ],
-    name: "teamNamesQuotes",
-    outputs: [
-      {
-        internalType: "string",
-        name: "",
-        type: "string"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
+    "inputs": [],
+    "name": "setWinnerPlayers",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
   },
   {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
-    ],
-    name: "totalTeamBets",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
+    "inputs": [],
+    "name": "setWinningTeam",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
-    name: "winnerPlayers",
-    outputs: [
+    "name": "teamNamesFix",
+    "outputs": [
       {
-        internalType: "address payable",
-        name: "",
-        type: "address"
+        "internalType": "string",
+        "name": "",
+        "type": "string"
       }
     ],
-    stateMutability: "view",
-    type: "function"
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
-    name: "winnersGains",
-    outputs: [
+    "name": "teamNamesQuotes",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
+        "internalType": "string",
+        "name": "",
+        "type": "string"
       }
     ],
-    stateMutability: "view",
-    type: "function"
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "winningTeam",
-    outputs: [
+    "inputs": [
       {
-        internalType: "string",
-        name: "",
-        type: "string"
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
-    stateMutability: "view",
-    type: "function"
+    "name": "totalTeamBets",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "winnerPlayers",
+    "outputs": [
+      {
+        "internalType": "address payable",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "winnersGains",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "winningTeam",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
   }
 ];
 

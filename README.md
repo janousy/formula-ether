@@ -1,19 +1,24 @@
 # Formula Ether
 
-## Description
-
-
+Formula Ether is dApp running on Ethereum, where multiple users can bet on their favorite teams.
+The game logic is implemented within a smart contract deployed on the blockchain.
 
 ## Installation Requirements
 
 - Node.js version > 12.0.0: https://nodejs.org/en/download/
 - Metamask browser extension: https://metamask.io/
+- Ganache or a connection to the UZHETH Blockchain
+- Deployed smart contract and its address
 
-### Ethereum Connection
-This client needs access to the UZHETH blockchain, providing an account with some assets available. 
-Therefore, the user needs to be within the UZH network, or establish a VPN connection.
+### Blockchain Connection
+This client needs a connection to a local Ganche instance. The [contract](https://github.com/janousy/formula-ether/blob/999193c500040612153204c28767041a0845942d/src/contracts/bettingContract.sol)
+can be deployed with e.g. [Remix IDE](remix.ethereum.org) by adding the local Ganache network to Metamask and the selecting `Injected Web3`
+as the environment upon deploying the contract. In this case the contract address needs to be updated in ```src/consts/addresses.const.js```
 The client will connect to this chain and
 interact with the deployed betting contract to place bets and retrieve winners.
+
+Alternatively, you can use the UZHETH blockchain, providing an account with some assets available. 
+Therefore, the user needs to be within the UZH network, or establish a VPN connection.
 To connect to the UZHETH blockchain the following credentials can be used:
 - Networkname: UZHETH
 - New RPC-URL: http://130.60.244.246:8545
@@ -21,10 +26,6 @@ To connect to the UZHETH blockchain the following credentials can be used:
 - Currency Symbol: UZHETH
 
 More information about the UZHEthereum chain can be found [here](http://130.60.24.79:1234/?network=UZHETH).
-
-Alternatively, your can run Ganache locally. The [contract](https://github.com/janousy/formula-ether/blob/999193c500040612153204c28767041a0845942d/src/contracts/bettingContract.sol) 
-can be deployed with e.g. [Remix IDE](remix.ethereum.org) by adding the local Ganache network to Metamask and the selecting `Injected Web3`
-as the environment upon deploying the contract.
 
 ## Project setup
 ```
