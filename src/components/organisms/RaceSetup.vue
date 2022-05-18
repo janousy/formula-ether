@@ -122,6 +122,7 @@ export default {
           totalAmountPerTeam.push(parsedInt)
         })
       }
+      console.log("totalAmounts", totalAmountPerTeam)
       this.$store.commit('raceStore/setTotalAmountPerTeam', totalAmountPerTeam);
       this.$store.commit('raceStore/setTotalBetSum', totalSum);
     },

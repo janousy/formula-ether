@@ -10,7 +10,8 @@ export async function sendBet(ethAmount, team, signer) {
     const bettingContract = new ethers.Contract(bettingAddress, ABI, signer);
     console.log('Calling contract to place bet');
     try {
-        let response = await bettingContract.bet(team.key, {value: ethAmount.toString()});
+        // define gasLimit to prevent tx failure due to out of gas
+        let response = await bettingContract.bet(team.key, {value: ethAmount.toString(), gasLimit: 400000});
         console.log(response)
         return 1;
     } catch (ex) {
@@ -27,7 +28,8 @@ export async function distributePrices(signer) {
     const bettingContract = new ethers.Contract(bettingAddress, ABI, signer);
     console.log('Calling contract to start race');
     try {
-        let response = await bettingContract.distributePrizes();
+        // define gasLimit to prevent tx failure due to out of gas
+        let response = await bettingContract.distributePrizes({ gasLimit: 600000});
         console.log(response)
     } catch (ex) {
         console.warn(ex)
