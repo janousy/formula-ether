@@ -3,6 +3,8 @@
 Formula Ether is a dApp running on Ethereum, where multiple users can bet on their favorite Formula 1 teams.
 The game logic is implemented within a smart contract deployed on the blockchain.
 
+![](resources/scr1.png)  |  ![](resources/scr2.png)
+
 ## Installation Requirements
 
 - Node.js version > 12.0.0: https://nodejs.org/en/download/
